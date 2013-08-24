@@ -15,16 +15,22 @@ Use no scoring and full-length room descriptions. [no scoring and verbose descri
 [Use no deprecated features.]
 Use American dialect.
 
+
 Section 0.1.2 - Includes
 
 Include Conversation Framework by Eric Eve.
 Include Conversation Responses by Eric Eve.
 Include Conversational Defaults by Eric Eve.
-Include Player Experience Upgrade by Aaron Reed.
 Include Keyword Interface by Aaron Reed.
 Include Trinity Inventory by Mikael Segercrantz.
 Include Numbers by Krister Fundin.
 
+Include Epistemology by Eric Eve.
+Include Small Kindnesses by Aaron Reed.
+[Include Default Messages by Ron Newcomb.]
+Include Remembering by Aaron Reed.
+
+[Use library message alerts.]
 
 Section 0.1.3 - Definitions 
 
@@ -35,6 +41,9 @@ Definition: A room is occupied rather than unoccupied if another person is in it
 Section 0.1.4 - Rules
 
 Rule for deciding whether all includes scenery: it does not.  [Take all and things like that do not include scenery]
+Rule for deciding whether all includes scenery: it does not.
+Rule for deciding whether all includes people while taking: it does not.
+[Rule for printing room description details: stop.]
 
 Section 0.1.5 - Scenes
 
@@ -72,7 +81,7 @@ To say name of (t - a thing) is:
 		say "[the t] is";
 	end if.
 	
-	
+
 Chapter 0.2 - When the game begins
 
 When play begins: 
@@ -92,17 +101,15 @@ When play begins:
 	now the left hand status line is
 		"[the player's surroundings] / [turn count] / [score]";
 	now the right hand status line is "Time: [time of day]";
-	now the time of day is 7:13 PM;
-	now the player is in the Lobby.
-
-
+	now the time of day is 7:13 PM.
 
 Chapter 0.3 - The player character
 
+The player is in Lobby.
 The player is neutral and calm.
 The player has a number called current level.  The current level of the player is 1.
 
-Instead of examining the player: say "You're are relatively handsom, successful executive in the textiles business.  Fourty-three and recently divorced with an eight year old son, [Trevor].  Since you're divorce, you've throw yourself into your work, leaving town, and your son, behind for weeks on end.  Sometimes it's tough to face reality."
+Instead of examining the player: say "You are relatively handsom, successful executive in the textiles business.  Fourty-three and recently divorced with an eight year old son, [Trevor].  Since you're divorce, you've throw yourself into your work, leaving town, and your son, behind for weeks on end.  Sometimes it's tough to face reality."
 
 The player is carrying a reservation and luggage.  The player wears the fedora hat.
 
@@ -313,6 +320,22 @@ Instead of opening luggage when location is not room 203:
 
 Understand "unpack [something]" as opening.	
 
+Section 0.5.8 - Bedrooms
+
+A bed is a kind of supporter.  A bed is always enterable. 
+
+	
+A clothed bed is a kind of bed.
+
+ A blanket is a kind of thing.  Some sheets are a kind of thing.  A pillow is a kind of thing.  Some sheets, a blanket, and a pillow are a part of every clothed bed.
+ 
+ Instead of taking something that is part of a clothed bed:
+	say "Stripping the bed down is not going to be useful."
+	
+The description of pillow is usually "Soft and comfortable, good for sleeping."
+The description of sheets is usually "White and smell freshly laundered."
+The description of blanket is usually "The blanks will keep you warm at night."
+	
 Chapter 0.6 - Floors
 
 Table of Floors 
@@ -338,40 +361,70 @@ Instead of waking up, say "While reality can seem like a nightmare, you really a
 Instead of thinking, say "You've done a lot of thinking lately, but this is not the time for idle thoughts."
 
 
-Section 0.7.2 - Printing the description of activity
+Section 0.7.2 - Additional lines for USE
 
-[I will note that after Emily Short and I discussed how to do this, she turned it into the Crusoe example in the I7 documentation.]
-Printing the description of something is an activity.
+[Understand "use [a wearable thing]" as wearing.]
 
-This is the fancy examining rule:
-	carry out the printing the description activity with the noun;
+Section 0.7.3 - Miscellaneous Verbs
 
-The fancy examining rule is listed instead of the standard examining rule in the carry out examining rulebook.
+Understand "plugh" or "xyzzy" or "frotz" or "plover" as a mistake ("When that word leaves your lips, small quiet voices in your head speak haunting words of a time long lost.....a time lost forever.").
 
-[Rule for printing the description of something (called item) (this is the standard printing the description of rule):
-	say "[description of item] [run paragraph on]" instead.]
+
+Section 0.7.4 - Sanity Check Rules
+
+The sanity-check rules are a rulebook.
+This is the sanity-check stage rule:
+	abide by the sanity-check rules.
+The sanity-check stage rule is listed before the before stage rule in the action-processing rules.
+
+Sanity-check eating an inedible thing:
+	say "[The noun] do[es]n't look very tasty, even if you were hungry." instead.
 	
-Rule for printing the description of something (called item): 
-	if the description of the item is not "": 
-		say "[description of item] [run paragraph on]"; 
-	otherwise: 
-		say "You see nothing special about [the item]. [run paragraph on]". 
+Sanity-check wearing something that is not wearable:
+	say "[one of][The noun] [is-are]n't wearable.[or]I'm not sure how you would do that with [the noun].[at random]" instead.
+	
+instead of switching on or switching off or entering a person:
+	say "That's probably not something they would appreciate you trying." 
+	
 
 
-Rule for printing the description of something (called item): 
-	if the description of the item is not "": 
-		say "[description of item] [run paragraph on]"; 
-	otherwise: 
-		say "You see nothing special about [the item]. [run paragraph on]". 
+Section 0.7.5 - Liquids
 
-[Ensure that we end our descriptions with a paragraph break]
-Last after printing the description of something:
-	say "[paragraph break]".
+[Minimal liquid needs for now so don't need the full extension]
 
-[To add a line to a description, use an 'After printing the description of...' rule. For example:
-After printing the description of something that is damp:
-	say "It is damp." instead.
-N.B. that the "instead" is needed to prevent extra blank lines from appearing.]
+A thing can be solid or fluid.  A thing is usually solid.
+
+Instead of waving or squeezing or pulling or pushing or rubbing or turning a fluid thing: 
+	say "[The noun] do[es]n't really respond to that." 
+	
+Sanity-check drinking a solid thing:
+	say "[The noun][is-are]n't liquid." instead.
+	
+Check drinking a fluid thing (called my-drink):
+	try eating my-drink instead.
+	
+Sanity-check burning a fluid thing:
+	say "This is not one of those rare liquids that will burn."
+	
+Rule for deciding whether all includes a fluid thing while taking: it does not.
+
+A thing can be contained or uncontained.  A thing is usually uncontained.
+
+Every turn when the player carries a fluid thing (called the puddle):
+	unless the puddle is contained:
+		move the puddle to the location;
+		say "[The puddle] drips through your fingers."
+		
+		
+
+Chapter 0.8 - Conversation
+
+Section 0.8.1 - General greetings
+
+A person can be alert.	[an alert person will actively notice you when you walk into the room]
+Definition: a person is alarmed if he is alert and he is not the current interlocutor.
+Every turn when an alarmed person (called the prospective interlocutor) is enclosed by the location:
+	try the prospective interlocutor saying hello to the player.
 
 Part 1 - Hotel Main Floor
 
@@ -393,7 +446,7 @@ The Lobby is a room.  "This is the lobby of your hotel.  At first glance it look
 
 As you look around you see the [elevator exterior] to the [north] and [if the hotel lounge is visited]to the [south] is a smokey lounge[otherwise]from the [south] cigarette smoke hangs just inside the doorway[end if]."
 
-the counter is a supporter and scenery in the lobby.  The description of the counter is "The counter is simply a way to keep you away from the other side."
+the counter is a supporter, enterable and scenery in the lobby.  The description of the counter is "The counter is simply a way to keep you away from the other side."
 
 The paperwork is scenery on the counter.  The description of paperwork is "As you peer at his paperwork [if the desk clerk is not recognized]the desk clerk[otherwise]Tom[end if] glares at you and says, 'Excuse me!'".
 
@@ -481,16 +534,20 @@ Section 1.2.3 - Fishbowl
 
 The fishbowl is a transparent open container.  The fishbowl is on the counter.  Understand "bowl" or "'fish bowl" as fishbowl.
 
-[The fishbowl contains water and fish.]
+The description of the fishbowl is "The small glass fishbowl sits on the counter off to the side, but well within reach of [if desk clerk is recognized]Tom[otherwise]the desk clerk[end if].  Inside are two gold-fish...well actually they are more red then gold.  [one of]They appear to be staring at you[or]They swim around each other as if reading for a joust[or]They look at [if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] as if in awe[or]They hang in the middle of the bowl looking at each other as if having a conversation[then at random]."
+
+The fish is an undescribed thing.  The fish are in the fishbowl.  The fish are plural-named.
+The water is a fluid thing in the fishbowl.  The water is undescribed.
 
 A procedural rule while examining the fishbowl: 
 	ignore the examine containers rule. 
 
-The description of the fishbowl is "The small glass fishbowl sits on the counter off to the side, but well within reach of [if desk clerk is recognized]Tom[otherwise]the desk clerk[end if].  Inside are two gold-fish...well actually they are more red then gold.  [one of]They appear to be staring at you[or]They swim around each other as if reading for a joust[or]They look at [if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] as if in awe[or]They hang in the middle of the bowl looking at each other as if having a conversation[then at random]."
-
 Instead of taking the fishbowl:
 	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] nearly jumps over the counter to stop you, 'Those are the property of the Inn, please do not take them', he yells breathlessly.  'You will do well to remember that things that are not yours, should not be taken.'[paragraph break]He seems a bit worked up over a pair of fish, but for now you head his warning."
-	
+
+instead of taking anything contained by the fishbowl:
+	try taking the fishbowl.
+
 instead of touching the fishbowl:
 	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] glares at you and you decide to pull your hand back."
 	
@@ -574,8 +631,7 @@ Chapter 2.9 - Room 203
 
 Room 203 is a room.  "As you stand in your room you see your pleasantly surprised at the grandeur of your accomodations.  [A king size bed] sits in one corner of the room, while a [writing desk] sits in the opposite corner.  Beside the bed is a [night stand] which upon it sits a [table lamp] and a [telephone].  To the north is a small bathroom."
 
-A king size bed is a enterable fixed in place supporter.   The king size bed is scenery.  The king size bed is in Room 203.  The description of king size bed is "It looks comfy enough and the [bedsheets] look clean."
-The bedsheets are a part of the king size bed.  The description of bedsheets is "The bedsheets look and smell fresh."
+A king size bed is a clothed bed.   The king size bed is scenery.  The king size bed is in Room 203.  The description of king size bed is "It looks comfy enough and the sheets look clean."
 A writing desk is a fixed in place supporter in Room 203. The writing desk is scenery.  The description of writing desk is "The desk is just the write size to pen a letter, but probably not large enough to spread out a bunch of paperwork."
 The night stand is a fixed in place supporter in Room 203.  The night stand is scenery. The description of night stand is "The night stand sits within arms reach of the bed.  Upon it sits a table lamp and a telephone."
 The table lamp is fixed in place thing on the night stand.  The description of table lamp is "The table lamp sits on the night stand where it will provide some reading light in bed."
