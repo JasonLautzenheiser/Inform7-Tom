@@ -18,6 +18,7 @@ Use American dialect.
 
 Section 0.1.2 - Includes
 
+Include Basic Screen Effects by Emily Short.
 Include Plurality by Emily Short.
 Include Conversation Framework by Eric Eve.
 Include Conversation Responses by Eric Eve.
@@ -49,8 +50,13 @@ Remembering is an action applying to one thing.
 
 Section 0.1.5 - Scenes
 
+A scene can be a flashback.
+
 Checking In is a scene.  Checking In begins when play begins.  Checking In ends when player carries the room-203-key for the first time.
 Finding your room is a scene.  Finding your room begins when checking in ends.  Finding your room ends when player is in room 203 for the first time.
+
+baseball-game is a flashback scene.  Baseball-game begins when baseball is remembered for the first time.
+
 
 Section 0.1.6 - Properties
 
@@ -403,32 +409,43 @@ Every turn when an alarmed person (called the prospective interlocutor) is enclo
 
 Chapter 0.8 - Subjects
 
+a subject can be remembered or forgotten.  A subject is usually forgotten.
+
+instead of remembering a subject (called whatever):
+	try thinking about whatever instead.
 
 Section 0.8.1 - Trevor
 
 Trevor is a familiar and seen subject.  Understand "son/kid/child/children" as Trevor. 
 
-[Before examining Trevor:
-	try thinking about trevor instead.]
-
-Instead of remembering Trevor:
-	try thinking about trevor instead.
-
 Before thinking about Trevor:
-	instead say "Trevor's a great kid and you miss him a lot.  However, being with him reminds your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
+	instead say "You remember how Trevor's a great kid and you miss him a lot.  However, being with him reminds you of your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
 
 Section 0.8.2 - Baseball
 
 baseball is a familiar and seen subject.
 
+before thinking about baseball:
+	now baseball is remembered;
+	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.[paragraph break][first time]Your vision blurs and your mind is transported to another place....[only]";
+	stop the action.
+	
+Chapter 0.8 - Characters
+
+[some characters you'll see through out the story.  characters that are only in one location may appear in their specific room in code.  Those here tend to be seen in multiple places and scenes.  General information is here, though specific changes based on location / scene may be in those spots.]
+
+Section 0.8.1 - Pam
+
+Pam is a woman.  
+
+
+	
+	
+
 
 Part 1 - Hotel Main Floor
 
 Chapter 1.1 - General Things
-
-Instead of going direction during Checking In:
-	say "[if the desk clerk is recognized]Tom[otherwise]The desk clerk[end if] looks up as you begin to pass by the counter, clears his throat to grab your attention and says, 'Excuse me.  Can I help you?'";
-	try silently saying hello to the desk clerk.
 
 After deciding the scope of the player:
 	if the location is the lobby, place the elevator exterior in scope;
@@ -455,6 +472,12 @@ Rule for reaching inside a room:
 	
 instead of giving reservation to desk clerk:
 	try quizzing the desk clerk about the reservation instead.
+
+Instead of going direction during Checking In:
+	say "[if the desk clerk is recognized]Tom[otherwise]The desk clerk[end if] looks up as you begin to pass by the counter, clears his throat to grab your attention and says, 'Excuse me.  Can I help you?'";
+	if clerk is not current interlocutor:
+		try silently saying hello to the desk clerk.
+
 
 Section 1.2.1 - Room 203 Key
 
@@ -489,8 +512,8 @@ To say name-of-desk-clerk:
 
 
 instead of examining the desk clerk for the first time:
-	say "The man appears to be the guy you want to talk to so you can check in and get to your room.  [paragraph break]You notice that his name-tag reads [']Tom['].";
-	now The Desk Clerk is recognized.
+	say "The man appears to be the guy you want to talk to so you can check in and get to your room[if desk clerk is not recognized].  You notice that his name-tag reads [']Tom['][end if].";
+	now the desk clerk is recognized.
 
 instead of examining the desk clerk:
 	 if Checking In has ended:
@@ -500,14 +523,14 @@ instead of examining the desk clerk:
 
 The desk clerk carries room-203-key.  The room-203-key is unseen.
 
-Instead of hailing:
-	if desk clerk  is current interlocutor:
-		instead say "'Yes?  Can I help you?'";
-		stop the action.
+after saying hello to desk clerk:
+	say "As you walk up to the [counter], [if desk clerk is recognized]Tom[otherwise]the desk clerk[end if] looks up, quickly appraising you and then offers a disinterested, '[if desk clerk is recognized]You again?[otherwise]My name is Tom,[end if] what do you want?'";
+	now the desk clerk is recognized.
 
-Greeting response for the desk clerk :
-	say "As you walk up to the [counter], [if desk clerk is recognized]Tom[otherwise]the desk clerk[end if] looks up, quickly appraising you and then offers a disinterested, 'Hello[if desk clerk is recognized] again[end if],[if desk clerk is not recognized] my name is Tom,[end if] what can I do for you?'";
-	now The Desk Clerk is recognized.
+before saying hello to desk clerk:
+	if desk clerk is current interlocutor:
+		say "He looks at you and taps his fingers on the counter waiting for you to say something important." instead;
+		stop the action.
 
 Implicit greeting response for the desk clerk:
 	say "[The desk clerk] looks up at you, slightly disturbed that you interrupted him in whatever he was doing.  [paragraph break]".
@@ -539,16 +562,16 @@ A procedural rule while examining the fishbowl:
 	ignore the examine containers rule. 
 
 Instead of taking the fishbowl:
-	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] nearly jumps over the counter to stop you, 'Those are the property of the Inn, please do not take them', he yells breathlessly.  'You will do well to remember that things that are not yours, should not be taken.'[paragraph break]He seems a bit worked up over a pair of fish, but for now you head his warning."
+	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] nearly jumps over the counter to stop you, 'Those are the property of the Inn, please do not take them', he yells breathlessly.  'You will do well to remember that things that are not yours, should not be taken.'[paragraph break]He seems a bit worked up over a pair of fish, but for now you heed his warning."
 
 instead of taking anything contained by the fishbowl:
 	try taking the fishbowl.
 
-instead of touching the fishbowl:
-	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] glares at you and you decide to pull your hand back."
+before doing something other than taking or examining the fishbowl:
+	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if]glares at you and you decide to rething doing that." instead.
 	
 Every turn during Checking In:
-	if a random chance of 1 in 10 succeeds:
+	if a random chance of 1 in 20 succeeds:
 		if player is in Lobby:
 			say "[one of][name-of-desk-clerk] looks at the fish intensly.[or][name-of-desk-clerk] taps gently on the fishbowl.[or][name-of-desk-clerk] reaches under the counter and throw a small piece of food which the fish devour.[then at random]" in sentence case
 	
@@ -649,6 +672,68 @@ Chapter 3.2 - Third Floor by the Elevator
 Third Floor is a room.  The printed name is "Third floor by the elevator"
 
 The elevator exterior is in Third Floor.
+
+Part 90 - Cut Scenes
+
+Saved location is a room that varies. Locker is a container. Wardrobe is a container.
+
+To strip the player: 
+	 now every thing carried by the player is in the locker; 
+	now every thing worn by the player is in the wardrobe; 
+	now saved location is location.
+	
+To restore the player: 
+	now every thing carried by the player is in the location; 
+	now every thing in the locker is carried by the player; 
+	now every thing in the wardrobe is worn by the player; 
+	move the player to saved location.
+
+Chapter 90.1 - Baseball game
+
+baseball-game ends when the umpire is revealed.
+
+When baseball-game begins:
+	pause the game;
+	clear the screen;
+	strip the player;
+	now player is in baseball-field;
+	the Ball-is-missed in two turns from now.
+
+When baseball-game ends:
+	pause the game;
+	clear the screen;
+	restore the player;
+
+
+Baseball-field is a room.  "You are sitting on the first base side of a [baseball-diamond].  Your son Trevor is up to bat.  Trevor is six and this is his first baseball game.  You feel excited and nervous all at the same time.  The anticipation of him doing well has eaten at you all day.  But most of all the thought of him having fun is forefront.[paragraph break]Trevor on the other hand, is all business.  He comes up to bat, with the ball sitting on the tee and the look on his face tells you that to him, this is the World Series.  To him, this is the most important moment of his life and he's got this under control.[paragraph break][Pam] on the other hand, is sitting beside you, smoking a cigarette, barely seems to notice that Trevor is there.  She's too focused yapping with her friends on her cell, to notice that her own son, her flesh and blood is up to bat."  The printed name of baseball-field is "Baseball Field".
+
+baseball-diamond is a thing in Baseball-field .  The printed name is "baseball diamond".  The description of the baseball-diamond is "You've been to a baseball field before.  Four bases, nine players on the field, a tenth up to bat and up to 3 more on the bases.  An umpire stands behind home plate and coaches stand at first and third base...you know your typically stuff....oh yes, these are all kids and your son is up to bat."  Understand "baseball/diamond" as baseball-diamond when baseball-game is happening.
+
+Instead of examining yourself during baseball-game:
+	say "You are sitting here on the edge of your seat watching your son play ball."
+	
+An umpire is a thing in baseball-field.  The umpire can be revealed or unrevealed.  The umpire is unrevealed.
+Pam is in Baseball-field.
+
+Before going during baseball-game:
+	say "You're not leaving now, your son is playing ball." instead.
+	
+At the time when the ball-is-missed:
+	say "Trevor swings......and misses.  Now the look of determination is even stronger on his face.  He's not going to miss it this time.";
+	the ball-is-hit in one turn from now.
+	
+At the time when the ball-is-hit:
+	say "Trevor swings....and hits the ball too left center.  At first he pauses as if time was standing still to watch the ball, then when he realizes he is supposed to run, off he goes.....headed to first base as fast as his little legs can carry him....easily reaching first base for his first hit.[paragraph break]Trevor looks up at you in the stands and gives a little smile and waves, you give a thumbs up, Pam continues to talk to her friend.";
+	the move-to-second in two turns from now.
+	
+At the time when the move-to-second:
+	say "The next batter up, cracks one two the shortstop.  Trevor runs as hard as he can to second base.  Your heart sinks as you realize that he will probably be out, but you have forgotten that these are only six year olds and the shortstop bobbles the ball and makes a wild throw to first base which then gets by the first baseman and without hesitation, Trevor moves to third.[Paragraph break]You lean over to ask Pam if she saw what smart base-running that was, she waves at you in dismissal and gives you a glare and you realize that your interruption was not appreciated.  You wonder why she even came.";
+	the move-to-home in one turn from now.
+	
+At the time when the move-to-home:
+	say "The next batter up, swings hard and dribbles the ball back to the pitcher.  Trevor is already half-way home when the pitcher picks up the ball and makes a throw to home.  The catcher, currently waving at his parents on the other side of the field is not paying attention and Trevor scores easily.  [paragraph break]As Trevor walks off the field, the umpire comes around and begins to brush the dirt off home plate.  As he stands back up, he turns and faces your direction and seemingly looks right at you and you think he is smiling at you.......that face looks familiar.....where have I seen him before.....";
+	now the umpire is revealed
+	
 
 Part 98 - Release
 
