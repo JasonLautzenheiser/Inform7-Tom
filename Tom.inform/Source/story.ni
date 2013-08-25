@@ -18,17 +18,15 @@ Use American dialect.
 
 Section 0.1.2 - Includes
 
+Include Plurality by Emily Short.
 Include Conversation Framework by Eric Eve.
 Include Conversation Responses by Eric Eve.
 Include Conversational Defaults by Eric Eve.
 Include Keyword Interface by Aaron Reed.
 Include Trinity Inventory by Mikael Segercrantz.
 Include Numbers by Krister Fundin.
-
 Include Epistemology by Eric Eve.
 Include Small Kindnesses by Aaron Reed.
-[Include Default Messages by Ron Newcomb.]
-Include Remembering by Aaron Reed.
 
 [Use library message alerts.]
 
@@ -38,12 +36,16 @@ Section 0.1.3 - Definitions
 Definition: a person is another if it is not the player.
 Definition: A room is occupied rather than unoccupied if another person is in it.
 
-Section 0.1.4 - Rules
+Section 0.1.4.1- Rules
 
 Rule for deciding whether all includes scenery: it does not.  [Take all and things like that do not include scenery]
 Rule for deciding whether all includes scenery: it does not.
 Rule for deciding whether all includes people while taking: it does not.
 [Rule for printing room description details: stop.]
+
+Section 0.1.4.2 - Actions
+
+Remembering is an action applying to one thing.
 
 Section 0.1.5 - Scenes
 
@@ -127,6 +129,18 @@ Section 0.3.2 - Fedora hat
 The fedora hat is a wearable thing.  The description is "Your trusty fedora has seen better days, but it's black trim-ribbon, while slightly frayed, still holds the feather your son found on your trip last year to the beach."
 Understand "trim-ribbon" or "ribbon/trim/feather" as fedora hat.
 
+Section 0.3.3 - Wallet
+
+The wallet is a container.  The initial appearance of the wallet is "Your black leather wallet has been with you [if fedora hat is familiar]almost as long as your hat[otherwise] for a good number of years[end if]."  The description of the wallet is "The black leather is cracked, but the wallet still serves it's purpose."
+
+The player is carrying the wallet.
+
+Section 0.3.4 - Photo of son
+
+The photo-of-trevor is a thing.   The description of photo-of-trevor  is "This photo of your son is a bit ragged from the constant viewing of it as you reminisce on better days.  The photo shows Trevor and you together after his first baseball game when he was just six."  The photo-of-trevor is in the wallet.  The printed name of photo-of-trevor is "photo"
+
+Understand "photo/photograph/picture" as photo-of-trevor 
+
 
 Chapter 0.4 - Standard Responses
 
@@ -144,9 +158,9 @@ The description of the flashlight is "This is a normal flashlight.  No batteries
 
 Section 0.5.2 - Elevator exterior
 
-An elevator exterior is an undescribed backdrop.  It is not scenery.   The description of the elevator exterior is "The [o][call button][x] is in the wall to the right of the door.  [dial-description]".  The printed name of elevator exterior is "elevator".
+An elevator exterior is an undescribed backdrop.  It is not scenery.   The description of the elevator exterior is "The [o][call button][x] is in the wall to the right of the [if elevator-door is open]open [end if]door.  [dial-description]".  The printed name of elevator exterior is "elevator".
 
-The elevator-door is an undescribed container.  It is closed and openable.
+The elevator-door is an undescribed container.  It is closed and openable.  The elevator-door is part of the elevator-exterior.
 
 To say dial-description:
 	say "Above the elevator is an [o]old-fashioned dial[x] that shows the elevator is currently on [run paragraph on]";
@@ -154,6 +168,9 @@ To say dial-description:
 		say "your floor.";
 	otherwise:
 		say " floor [current level of lift in words]."
+
+Instead of opening the elevator:
+	say "The elevator doors can not be opened manually.  You will have to wait until the elevator arrives on your floor.";
 
 before examining the elevator exterior:
 	if location is the lobby:
@@ -174,31 +191,21 @@ Instead of going inside in the presence of elevator exterior:
 	if the elevator-door is open:
 		move the player to the lift instead;
 	otherwise:
-		if the lift is stationary:
-			say "The doors of the elevator have to be opened first.  Try pushing the call button.";
-		otherwise:
-			say "You have to wait until the elevator arrives on your floor.";
+		try opening the elevator-door instead.
 		
 Section 0.5.3 - Elevator
 
-The Lift is a room.  "The elevator is just like every other elevator you've been on.  The numbered buttons on the [panel] are number 1, 2 and 3.  The dial inside the door shows you are currently on floor [current level of the Lift]."  The printed name of the Lift is "Elevator".
+The Lift is a room.  The description of the lift is "The large elevator [if the lift is unoccupied] is empty[end if].  A [three-legged stool], where a elevator jockey would sit, is in front of the elevators [control panel]."  The printed name of the Lift is "The Elevator".
 
 Understand "elevators/door/doors" as Lift when in the Lift.
 
-The panel is a fixed in place undescribed thing in the lift.  The description is "The panel just has three buttons labeled: 1, 2, and 3."
+The three-legged stool is a fixed in place supporter in the lift.  The description is "The three-legged stool sits in front of the elevators control panel."  The stool is enterable.
+
+The control panel is a fixed in place undescribed thing in the lift.  The description is "The panel's three buttons are labeled 1, 2, and 3."  The initial appearance of the panel is "The elevator's control panel sits beside the door with just three buttons labeled 1, 2 and 3."
 
 Instead of listening when in the lift, say "You can hear the faint sound of music coming from all sides."
 
 The Lift has a number called current level.  The current level of the lift is 3.
-The lift can be ascending, descending or stationary.  The lift is stationary.
-
-Every turn when the lift is not stationary:
-	if lift is ascending:
-		now the current level of the lift is the current level of the lift plus 1;
-	otherwise if lift is descending:
-		now the current level of the lift is the current level of the lift minus 1;
-	if player is in the lift:
-		now the current level of the player is current level of the lift;
 
 Before going south in the lift, try going outside instead.
 
@@ -210,45 +217,24 @@ Before going outside in the lift:
 		otherwise:
 			say "Error in Table of floors!!!" instead;
 	otherwise:
-		if the lift is stationary:
-			say "The doors of the elevator have to be opened first.  Try pushing one of the floor buttons.";
-		otherwise:
-			say "You have to wait until the elevator arrives on the floor you are trying to reach.";
+		say "The doors of the elevator have to be opened first.  Try pushing one of the floor buttons.";
 
 After pushing something (called the item pushed):
 	if the item pushed is call button and location contains elevator exterior:
-		if the lift is not stationary:
-			instead say "Be patient....the elevator won't come any faster by pushing the call button again.";
 		if the current level of the lift is the current level of the player:
-			now the lift is stationary;
 			now the elevator-door is open;
 			the doors shut in two turns from now;
 			say "The lift pings politely and opens its doors, since it was already here." instead;
 		otherwise:
-			say "You here a ring as the elevator begins to move to your floor.";
-			if the current level of the player is greater than the current level of the lift:
-				now the lift is ascending;
-			otherwise if the current level of the player is less than the current level of the lift:
-				now the lift is descending;
-			The Lift arrives in the absolute value of (current level of lift minus current level of player) turns from now.
+			now the current level of the lift is the current level of the player;
+			now the elevator-door is open;
+			say "You hear a ring as the elevator begins to move to your floor and in a few moments it is here and the doors open before you.".
 
-At the time when the Lift arrives:
-	now lift is stationary;
-	now the elevator-door is open;
-	if the current level of the lift is less than 1:
-		now the current level of the lift is 1;
-	if player is in the lift:
-		now the current level of the player is the current level of the lift;
-	if the player is in the lift or the elevator-door is in location:
-		say "The elevator pings politely and opens its doors.";
-	otherwise:
-		say "From a distance you hear the elevator ping.";
-	the doors shut in two turns from now.
-	
+
 At the time when the doors shut:
 	if elevator-door is open:
 		if the elevator-door is in location:
-			say "The elevator doors close.";
+			say "The elevator doors close. quietly";
 		now the elevator-door is closed.
 
 Pressing button is an action applying to one number.
@@ -256,28 +242,18 @@ understand "push [number]" as pressing button.  Understand "push [number] button
 
 Check pressing button:
 	if the player is not in the lift, say "You cannot control the elevator if you are not inside of it." instead;
-	if the lift is not stationary, say "Pressing the button repeatedly will not make the elevator move any quicker.";
 	if the number understood is the current level of the lift:
-		now the lift is stationary;
 		now the elevator-door is open;
 		the doors shut in two turns from now;
 		say "The lift pings politely and opens its doors, since it was already here." instead;
-	if the number understood is greater than 3, say "There are only 3 floors." instead;
+	if the number understood is greater than 3, say "There are only three floors." instead;
 	if the number understood is less than 0, say "You cannot go below the main floor in this elevator." instead.
 	
 Carry out pressing button:
 	now the elevator-door is closed;
-	if the current level of the player is greater than the number understood:
-		now the lift is descending;
-	otherwise if the current level of the player is less than the number understood:
-		now the lift is ascending;
-	The Lift arrives in the absolute value of (the number understood minus current level of player) minus 1 turns from now;
-	say "You press button [the number understood] and hear the elevator come to life and it begins to move."
+	say "You press button [the number understood in words] and hear the elevator come to life and it begins to move.  Quickly, seemingly much faster than you thought it should take, you've arrived at floor [the number understood in words] and the doors open before you.";
+	the doors shut in two turns from now;
 	
-
-		
-		
-		
 		
 Section 0.5.3 - Look For
 
@@ -289,31 +265,31 @@ Understand "ask [someone] about [any known thing]" as quizzing it about.
 
 The can't greet current interlocutor rule is not listed in the check saying hello to rulebook.
 
-Section 0.5.5 - Trevor
-
-Trevor is a familiar and seen subject.  Understand "son/kid/child/children" as Trevor.  
-
-Before examining Trevor:
-	try thinking about trevor instead.
-
-Instead of remembering Trevor:
-	try thinking about trevor instead.
-
-Before thinking about Trevor:
-	instead say "Trevor's a great kid and you miss him a lot.  However, being with him reminds your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
 
 	
 Section 0.5.6 - Thinking about something
 
+Table of Remembering Messages
+rule name	message
+Remembering generic report remembering rule	"I really have no thoughts on [the noun] [line break]"
+
 Thinking about is an action applying to one thing.  Understand "Think about [any thing]" as thinking about.
 Understand "Remember [any thing]" as thinking about.	
+understand "examine [any seen thing]" or "x [any seen thing]" or "look at/for [any seen thing]" as remembering.
+
+The allow remembering faraway things rule is listed instead of the basic accessibility rule in the action-processing rules.
+
+This is the allow remembering faraway things rule:
+	unless remembering a subject, abide by the basic accessibility rule.
+
+Report remembering (this is the Remembering generic report remembering rule): say the message corresponding to a rule name of Remembering generic report remembering rule in Table of Remembering Messages.
 
 Before thinking about something (called the subject):
 	instead say "I really have no thoughts on [the subject]."
 
 Section 0.5.7 - Luggage
 
-Luggage is a closed openable container.  The description is "Your hard-shell suitcase has served you well all these years. It may look old, but it serves its purpose."
+Luggage is a closed openable container.  The description is "Your hard-shell suitcase has served you well all these years. It may look old, but it serves its purpose."  Understand "suitcase" as luggage.
 
 Instead of opening luggage when location is not room 203:
 	say "You shouldn't unpack your luggage until you get to your room."
@@ -324,7 +300,6 @@ Section 0.5.8 - Bedrooms
 
 A bed is a kind of supporter.  A bed is always enterable. 
 
-	
 A clothed bed is a kind of bed.
 
  A blanket is a kind of thing.  Some sheets are a kind of thing.  A pillow is a kind of thing.  Some sheets, a blanket, and a pillow are a part of every clothed bed.
@@ -425,6 +400,27 @@ A person can be alert.	[an alert person will actively notice you when you walk i
 Definition: a person is alarmed if he is alert and he is not the current interlocutor.
 Every turn when an alarmed person (called the prospective interlocutor) is enclosed by the location:
 	try the prospective interlocutor saying hello to the player.
+
+Chapter 0.8 - Subjects
+
+
+Section 0.8.1 - Trevor
+
+Trevor is a familiar and seen subject.  Understand "son/kid/child/children" as Trevor. 
+
+[Before examining Trevor:
+	try thinking about trevor instead.]
+
+Instead of remembering Trevor:
+	try thinking about trevor instead.
+
+Before thinking about Trevor:
+	instead say "Trevor's a great kid and you miss him a lot.  However, being with him reminds your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
+
+Section 0.8.2 - Baseball
+
+baseball is a familiar and seen subject.
+
 
 Part 1 - Hotel Main Floor
 
