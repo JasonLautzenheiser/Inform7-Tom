@@ -48,6 +48,10 @@ Section 0.1.4.2 - Actions
 
 Remembering is an action applying to one thing.
 
+To say p:
+	say "[paragraph break]".
+	
+	
 Section 0.1.5 - Scenes
 
 A scene can be a flashback.
@@ -55,7 +59,9 @@ A scene can be a flashback.
 Checking In is a scene.  Checking In begins when play begins.  Checking In ends when player carries the room-203-key for the first time.
 Finding your room is a scene.  Finding your room begins when checking in ends.  Finding your room ends when player is in room 203 for the first time.
 
-baseball-game is a flashback scene.  Baseball-game begins when baseball is remembered for the first time.
+baseball-game is a flashback scene.  Baseball-game begins when photo-of-trevor is familiar for the first time.
+
+flight-in is a flashback scene.  flight-in begins when reservation is familiar for the first time.
 
 
 Section 0.1.6 - Properties
@@ -92,7 +98,7 @@ To say name of (t - a thing) is:
 
 Chapter 0.2 - When the game begins
 
-When play begins: 
+[When play begins: 
 	now every scenery thing is keyworded;
 	display the boxed quotation "... Next came one [line break]
 	Who mourned in earnest, when the captive ark[line break]
@@ -109,7 +115,7 @@ When play begins:
 	now the left hand status line is
 		"[the player's surroundings] / [turn count] / [score]";
 	now the right hand status line is "Time: [time of day]";
-	now the time of day is 7:13 PM.
+	now the time of day is 7:13 PM.]
 
 Chapter 0.3 - The player character
 
@@ -130,11 +136,17 @@ Understand "hotel room" or "room" as reservation
 
 before dropping the reservation, instead say "You probably don't want to lose that." 
 
+after examining the reservation for the first time:
+	now baseball is remembered;
+	say "The office manager booked this reservation for you.  Typically he puts you up at a little two bit motel, so not sure why he chose this place....I'm sure it wasn't cheap.[paragraph break]He did make up for it on the flight however by booking you coach.....might as well been in the luggage compartment for all it was worth.  The landing was rough...."
+	
+	
 Section 0.3.2 - Fedora hat
 
 The fedora hat is a wearable thing.  The description is "Your trusty fedora has seen better days, but it's black trim-ribbon, while slightly frayed, still holds the feather your son found on your trip last year to the beach."
 Understand "trim-ribbon" or "ribbon/trim/feather" as fedora hat.
 
+	
 Section 0.3.3 - Wallet
 
 The wallet is a container.  The initial appearance of the wallet is "Your black leather wallet has been with you [if fedora hat is familiar]almost as long as your hat[otherwise] for a good number of years[end if]."  The description of the wallet is "The black leather is cracked, but the wallet still serves it's purpose."
@@ -143,7 +155,13 @@ The player is carrying the wallet.
 
 Section 0.3.4 - Photo of son
 
-The photo-of-trevor is a thing.   The description of photo-of-trevor  is "This photo of your son is a bit ragged from the constant viewing of it as you reminisce on better days.  The photo shows Trevor and you together after his first baseball game when he was just six."  The photo-of-trevor is in the wallet.  The printed name of photo-of-trevor is "photo"
+The photo-of-trevor is a thing.   The description of photo-of-trevor  is "This photo of your son is a bit ragged from the constant viewing of it as you reminisce on better days.  The photo shows Trevor and you together after his first baseball game when he was just six."
+
+after examining photo-of-trevor for the first time:
+	now baseball is remembered;
+	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.[paragraph break][first time]Your vision blurs and your mind is transported to another place....[only]".
+
+The photo-of-trevor is in the wallet.  The printed name of photo-of-trevor is "photo"
 
 Understand "photo/photograph/picture" as photo-of-trevor 
 
@@ -281,7 +299,7 @@ Remembering generic report remembering rule	"I really have no thoughts on [the n
 
 Thinking about is an action applying to one thing.  Understand "Think about [any thing]" as thinking about.
 Understand "Remember [any thing]" as thinking about.	
-understand "examine [any seen thing]" or "x [any seen thing]" or "look at/for [any seen thing]" as remembering.
+understand "examine [any known subject]" or "x [any known subject]" or "look at/for [any known subject]" as remembering.
 
 The allow remembering faraway things rule is listed instead of the basic accessibility rule in the action-processing rules.
 
@@ -419,7 +437,8 @@ Section 0.8.1 - Trevor
 Trevor is a familiar and seen subject.  Understand "son/kid/child/children" as Trevor. 
 
 Before thinking about Trevor:
-	instead say "You remember how Trevor's a great kid and you miss him a lot.  However, being with him reminds you of your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
+	if baseball-game is not happening:
+		instead say "You remember how Trevor's a great kid and you miss him a lot.  However, being with him reminds you of your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
 
 Section 0.8.2 - Baseball
 
@@ -427,7 +446,7 @@ baseball is a familiar and seen subject.
 
 before thinking about baseball:
 	now baseball is remembered;
-	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.[paragraph break][first time]Your vision blurs and your mind is transported to another place....[only]";
+	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.";
 	stop the action.
 	
 Chapter 0.8 - Characters
@@ -510,16 +529,25 @@ To say name-of-desk-clerk:
 	otherwise:
 		say "the desk clerk" ;
 
+To say Name-of-desk-clerk:
+	if the desk clerk is recognized:
+		say "Tom";
+	otherwise:
+		say "The desk clerk" ;
 
-instead of examining the desk clerk for the first time:
+the description of the desk clerk is "[Name-of-desk-clerk] is wearing a black suit with bow tie and white undershirt.  His hair is slicked back and to the left neatly and his oblong face and square jaw give him a look of an anvil.  His small round spectacles make his eyes appears especially beady on such a large head."
+
+[instead of examining the desk clerk for the first time:
 	say "The man appears to be the guy you want to talk to so you can check in and get to your room[if desk clerk is not recognized].  You notice that his name-tag reads [']Tom['][end if].";
 	now the desk clerk is recognized.
+]
 
-instead of examining the desk clerk:
+[instead of examining the desk clerk:
 	 if Checking In has ended:
 		say "Tom, is the guy to ask for anything you may need.";
 	otherwise:
 		say "Tom can help you check in."
+]
 
 The desk clerk carries room-203-key.  The room-203-key is unseen.
 
@@ -568,7 +596,7 @@ instead of taking anything contained by the fishbowl:
 	try taking the fishbowl.
 
 before doing something other than taking or examining the fishbowl:
-	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if]glares at you and you decide to rething doing that." instead.
+	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if]glares at you and you decide to rethink doing that." instead.
 	
 Every turn during Checking In:
 	if a random chance of 1 in 20 succeeds:
@@ -693,6 +721,7 @@ Chapter 90.1 - Baseball game
 baseball-game ends when the umpire is revealed.
 
 When baseball-game begins:
+	say "Your vision blurs and your mind is transported to another place.";
 	pause the game;
 	clear the screen;
 	strip the player;
@@ -704,7 +733,6 @@ When baseball-game ends:
 	clear the screen;
 	restore the player;
 
-
 Baseball-field is a room.  "You are sitting on the first base side of a [baseball-diamond].  Your son Trevor is up to bat.  Trevor is six and this is his first baseball game.  You feel excited and nervous all at the same time.  The anticipation of him doing well has eaten at you all day.  But most of all the thought of him having fun is forefront.[paragraph break]Trevor on the other hand, is all business.  He comes up to bat, with the ball sitting on the tee and the look on his face tells you that to him, this is the World Series.  To him, this is the most important moment of his life and he's got this under control.[paragraph break][Pam] on the other hand, is sitting beside you, smoking a cigarette, barely seems to notice that Trevor is there.  She's too focused yapping with her friends on her cell, to notice that her own son, her flesh and blood is up to bat."  The printed name of baseball-field is "Baseball Field".
 
 baseball-diamond is a thing in Baseball-field .  The printed name is "baseball diamond".  The description of the baseball-diamond is "You've been to a baseball field before.  Four bases, nine players on the field, a tenth up to bat and up to 3 more on the bases.  An umpire stands behind home plate and coaches stand at first and third base...you know your typically stuff....oh yes, these are all kids and your son is up to bat."  Understand "baseball/diamond" as baseball-diamond when baseball-game is happening.
@@ -712,8 +740,9 @@ baseball-diamond is a thing in Baseball-field .  The printed name is "baseball d
 Instead of examining yourself during baseball-game:
 	say "You are sitting here on the edge of your seat watching your son play ball."
 	
-An umpire is a thing in baseball-field.  The umpire can be revealed or unrevealed.  The umpire is unrevealed.
-Pam is in Baseball-field.
+An umpire is a thing in baseball-field.  The umpire can be revealed or unrevealed.  The umpire is unrevealed.  The description of umpire is "Suited up in his gear like he is umping a professional game, the umpire is taking this game amongst six year olds as serious as one as well."
+
+Pam is in Baseball-field.  The description of Pam is "My wife, still as beautiful as the day we met.  You would never guess she is in her 40s.  But her personality has changed drastically since we first met, and even more so since Trevor was born.[first time][paragraph break]We met in college as freshman, becoming best friends, then lovers and eventually married our senior year.   We held off having children until she became established in her career at the ad agency.  But even then by our mid thirties, I think she gave in to having a baby just so I'd stop bugging her about it.  After Trevor was born, she went right back to work and Trevor became a nuisance to her.....oh she puts on the air of a loving mother in public, but as soon as she is out of the public eye, she is back to thinking only of herself.[only]"
 
 Before going during baseball-game:
 	say "You're not leaving now, your son is playing ball." instead.
@@ -727,13 +756,109 @@ At the time when the ball-is-hit:
 	the move-to-second in two turns from now.
 	
 At the time when the move-to-second:
-	say "The next batter up, cracks one two the shortstop.  Trevor runs as hard as he can to second base.  Your heart sinks as you realize that he will probably be out, but you have forgotten that these are only six year olds and the shortstop bobbles the ball and makes a wild throw to first base which then gets by the first baseman and without hesitation, Trevor moves to third.[Paragraph break]You lean over to ask Pam if she saw what smart base-running that was, she waves at you in dismissal and gives you a glare and you realize that your interruption was not appreciated.  You wonder why she even came.";
+	say "The next batter up, cracks one to the shortstop.  Trevor runs as hard as he can to second base.  Your heart sinks as you realize that he will probably be out, but you have forgotten that these are only six year olds and the shortstop bobbles the ball and makes a wild throw to first base which then gets by the first baseman and without hesitation, Trevor moves to third.[Paragraph break]You lean over to ask Pam if she saw what smart base-running that was, she waves at you in dismissal and gives you a glare and you realize that your interruption was not appreciated.  You wonder why she even came.";
 	the move-to-home in one turn from now.
 	
 At the time when the move-to-home:
 	say "The next batter up, swings hard and dribbles the ball back to the pitcher.  Trevor is already half-way home when the pitcher picks up the ball and makes a throw to home.  The catcher, currently waving at his parents on the other side of the field is not paying attention and Trevor scores easily.  [paragraph break]As Trevor walks off the field, the umpire comes around and begins to brush the dirt off home plate.  As he stands back up, he turns and faces your direction and seemingly looks right at you and you think he is smiling at you.......that face looks familiar.....where have I seen him before.....";
 	now the umpire is revealed
 	
+Before thinking about Trevor while baseball-game is happening:
+	say "Trevor is only six, yet looks so grown up in his baseball gear." instead.
+	
+
+Chapter 90.2 - Flight in
+
+flight-in ends when the dark-figure is revealed.
+
+flight-scene-state is a kind of value.  the flight-scene-states are part1, part2 and part3.  
+Airplane has a flight-scene-state.  
+
+when flight-in begins:
+	say "Your vision blurs and your mind is transported to another place.";
+	pause the game;
+	clear the screen;
+	strip the player;
+	now the reservation is carried by the player;
+	now the wallet is carried by the player;
+	now the fedora hat is worn by the player;
+	now player is in airplane;
+	airplane-scene-2 happens in one turn from now.
+
+When flight-in ends:
+	pause the game;
+	clear the screen;
+	restore the player;
+	now the reservation is carried by the player;
+	now the wallet is carried by the player;
+	now the fedora hat is worn by the player;
+
+	
+Section 90.2.1 - Item descriptions
+	
+Airplane is a room.  The description of airplane is "[one of]....you're coming in hard for the landing.  Not sure what is going on, but the pilot gave an announcement moments before landing letting us know it was going to be a rough one.  He wasn't mistaken.  Jostled about, you're wondering how the plane manages to stay together, as you sure feel like you're being shaken apart.  The old lady beside you almost rolls in your lap, partially from the jostle, but I think she is truly frightened and you're the closest thing to cling to.[or]You're sitting in coach [if elderly lady is on-stage]beside a heavy [elderly lady] that smells of perfume and cigarettes[end if].[stopping]". 
+
+The elderly lady is a woman in airplane.  The elderly lady is undescribed.  The description of the elderly lady is "The old lady beside you is quite large.  She has been a pleasant companion throughout the flight however. Unfortunately, her girth has made for a rather unpleasant trip.  She smells of cheap perfume and cigarettes, you'll be smelling those for quite some time now.  She has been a constant chatter box, but despite listening to her for hours, you've learned little about her other than she is coming home."
+
+The airplane-window is scenery in the airplane.  The printed name of airplane-window is "window".  Understand "window" as airplane-window while flight-in is happening.
+
+The dark-figure is an undescribed thing.  The dark-figure can be revealed or unrevealed.  The dark-figure is unrevealed.  dark-figure is in airplane.
+
+[understand "look out/-- [something]" as examining airplane-window.]
+
+Before examining airplane-window when flight-in is happening:
+	if the flight-scene-state of the airplane is part1:
+		instead say "You try to get a look out the window, but the jostling is making it difficult to see anything clearly.";
+	otherwise if the flight-scene-state of the airplane is part2:
+		instead say "You see the airport pass before you out the window, but getting any kind of good look would require the old lady to move out of the way.";
+	otherwise if flight-scene-state of airplane is part3:
+		 say "You take a closer look out the window towards the terminal.  Depsite being off in the distance, you notice a figure....a dark figure standing a the terminal window.  You lean closer, almost pressing your nose to the window, yes he is there and  damn he looks familiar.   Wait, he turns his head, and appears to be looking in your direction, he starts to raise his hand as if to wave....
+
+'Pardon me, ' the old lady says as she reaches across you once more, 'I[']ve left my purse sitting on the floor....be a dear and grab it for me would you.'
+
+As you hand her the purse, you turn back towards the window.....and the figure is gone.";
+		now the dark-figure is revealed;
+		stop the action.
+
+
+		
+Section 90.2.2 - Scheduled events
+
+at the time when airplane-scene-2 happens:
+	say "The plane has finally landed...after bouncing up and down the runway a few times and is now slowly rolling to a stop.  You are none the worse for wear, despite being a bit frazzled.  The old lady on the other hand appears to be gasping for breath, she is extremely agitated and seems near to panicking.  You try to calm her down by talking to here about her family.
+
+'You say you're from around here?' you ask.
+
+'Ye..es, ' she answers breathlessly, 'my family owned a local hotel in town.....until we had to sell it during the depression.'
+
+'Which hotel?'
+
+'The Beumont on 1st street in the old center of town, ' she replies.
+
+You realize that is where you are staying, but before you can get that tidbit out, she cries out;
+
+'That old bastard that stole it from my pappy, he's a strange one for sure.  He still runs that old place and I see people coming and going, but I don't know....there is something wierd going on there.'";
+	airplane-scene-3 happens in 1 turn from now;
+	now the flight-scene-state of airplane is part2.
+	
+at the time when airplane-scene-3 happens:
+	say "The plane has come to a stop, finally.   You've just gotten yourself unbuckled when the old lady says, 
+
+'I'm out of here.  I've had more of flying than and old lady can handle.'
+
+She get's out of her seat and is now crawling over you to get out into the aisle.  The flight attendents are too busy to notice and the old lady (you never did catch her name) manages to squeeze out....despite giving you a view you care not to remember.
+
+As you climb up, your eyes pass over the window and you pause to look as you get a good view of the terminal, despite being off in the distance.  Just as your about to turn away, something catches your eye.";
+	now elderly lady is off-stage;
+	now flight-scene-state of airplane is part3.
+	
+Section 90.2.3 - Scene specific rules / actions
+
+instead of jumping during flight-in:
+	say "You're currently strapped in and need to stay that way until the flight has ended."
+
+
+
 
 Part 98 - Release
 
