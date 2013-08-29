@@ -25,9 +25,14 @@ Include Conversation Responses by Eric Eve.
 Include Conversational Defaults by Eric Eve.
 Include Keyword Interface by Aaron Reed.
 Include Trinity Inventory by Mikael Segercrantz.
-Include Numbers by Krister Fundin.
 Include Epistemology by Eric Eve.
 Include Small Kindnesses by Aaron Reed.
+
+Section 0.1.2.1 - Includes - Not for release
+
+Include Object Response Tests by Juhana Leinonen.
+
+[Include Property Checking by Emily Short.]
 
 [Use library message alerts.]
 
@@ -119,7 +124,7 @@ Chapter 0.2 - When the game begins
 
 Chapter 0.3 - The player character
 
-The player is in Lobby.
+The player is in Outside-Hotel.
 The player is neutral and calm.
 The player has a number called current level.  The current level of the player is 1.
 
@@ -274,7 +279,8 @@ Check pressing button:
 	if the number understood is less than 0, say "You cannot go below the main floor in this elevator." instead.
 	
 Carry out pressing button:
-	now the elevator-door is closed;
+	now the elevator-door is open;
+	now the current level of the lift is the number understood;
 	say "You press button [the number understood in words] and hear the elevator come to life and it begins to move.  Quickly, seemingly much faster than you thought it should take, you've arrived at floor [the number understood in words] and the doors open before you.";
 	the doors shut in two turns from now;
 	
@@ -472,11 +478,11 @@ After deciding the scope of the player:
 
 Chapter 1.2 - Hotel Lobby
 
-The Lobby is a room.  "This is the lobby of your hotel.  At first glance it looks impressive and extravagent, but you suspect that if you look close enough you'll see it's just like every two-bit motel you've stayed at....it's just that this is costing quite a bit more.
+The Lobby is a room.  "[first time]As you come in through the [revolving-door] to the south, you pause to to a look around at the hotel you'll call home for the next three days.[only]The [marble floor] gleams with fresh polish and reflects the large [crystal chandelier] that hangs overhead.   Along the west wall is a large [fireplace], with a modest fire going that is taking the chill off the cool November air.  Above the fireplace hangs a large [oil portrait] of a man.
 
-[if the desk clerk  is not recognized]The desk clerk stands behind the counter in front of you, appearing bored as he looks at [the paperwork] in front of him, but you suspect that he sees and knows more than he first appears.[otherwise]Tom is behind the counter, shuffling through some paperwork.[end if]
+[if the desk clerk  is not recognized]The desk clerk stands behind the counter along the north wall, appearing bored as he looks at [the paperwork] in front of him, but you suspect that he sees and knows more than he first appears.[otherwise]Tom is behind the counter, shuffling through some paperwork.[end if]
 
-As you look around you see the [elevator exterior] to the [north] and [if the hotel lounge is visited]to the [south] is a smokey lounge[otherwise]from the [south] cigarette smoke hangs just inside the doorway[end if]."
+As you look around you see the [elevator exterior] to the [north] just past the counter and [if the hotel lounge is visited]to the [east] is a smokey lounge[otherwise]from the [east] cigarette smoke hangs just inside a darkened doorway[end if].  The [south] is the [revolving-door] that will take you back out on the street."
 
 the counter is a supporter, enterable and scenery in the lobby.  The description of the counter is "The counter is simply a way to keep you away from the other side."
 
@@ -485,6 +491,9 @@ The paperwork is scenery on the counter.  The description of paperwork is "As yo
 instead of taking paperwork:
 	try examining paperwork.  [say "[description of paperwork][paragraph break]".]
 
+instead of pushing paperwork:
+	 say "As you move to brush the paperwork aside, [name-of-desk-clerk] quickly grabs your arm to stop you and then only after glaring at you, lets you go."
+
 Rule for reaching inside a room:
 	say "You are not close enough to to do that.";
 	deny access.
@@ -492,11 +501,21 @@ Rule for reaching inside a room:
 instead of giving reservation to desk clerk:
 	try quizzing the desk clerk about the reservation instead.
 
-Instead of going direction during Checking In:
-	say "[if the desk clerk is recognized]Tom[otherwise]The desk clerk[end if] looks up as you begin to pass by the counter, clears his throat to grab your attention and says, 'Excuse me.  Can I help you?'";
-	if clerk is not current interlocutor:
-		try silently saying hello to the desk clerk.
+before going south in Lobby:
+	say "You don't want to leave before your business is done." instead.
+	
+before going direction during Checking In:
+	if location is Lobby:
+		say "[if the desk clerk is recognized]Tom[otherwise]The desk clerk[end if] looks up as you begin to pass by the counter, clears his throat to grab your attention and says, 'Excuse me.  Can I help you?'" instead;
+		if clerk is not current interlocutor:
+			try silently saying hello to the desk clerk instead;
+	otherwise:
+		continue the action.
 
+The marble floor is scenery in the lobby.
+The crystal chandelier is scenery in the lobby.
+The fireplace is scenery in the lobby.
+The oil portrait is a fixed in place thing in the lobby.  The oil portrait is undescribed.  The description of the oil portrait is "The portrait is of a [if the desk clerk is familiar]familiar looking [end if]man with a stern look on his face, glasses that make his eyes look exceptionally beady, a black suit coat and a black bow-tie."
 
 Section 1.2.1 - Room 203 Key
 
@@ -536,18 +555,6 @@ To say Name-of-desk-clerk:
 		say "The desk clerk" ;
 
 the description of the desk clerk is "[Name-of-desk-clerk] is wearing a black suit with bow tie and white undershirt.  His hair is slicked back and to the left neatly and his oblong face and square jaw give him a look of an anvil.  His small round spectacles make his eyes appears especially beady on such a large head."
-
-[instead of examining the desk clerk for the first time:
-	say "The man appears to be the guy you want to talk to so you can check in and get to your room[if desk clerk is not recognized].  You notice that his name-tag reads [']Tom['][end if].";
-	now the desk clerk is recognized.
-]
-
-[instead of examining the desk clerk:
-	 if Checking In has ended:
-		say "Tom, is the guy to ask for anything you may need.";
-	otherwise:
-		say "Tom can help you check in."
-]
 
 The desk clerk carries room-203-key.  The room-203-key is unseen.
 
@@ -633,11 +640,39 @@ Main Floor is a room. "You stand outside the [if elevator-door is open]opened [e
 The elevator exterior is in Main Floor.  
 
 
+Chapter 1.5 - Outside Hotel
 
+Outside-Hotel is a room.  Outside-Hotel is south of revolving-door.  "The hotel you're staying at is the premier hotel in this town, well actually it's the only one these days.   The brochure you read on the flight, showed you a lavish building with a country view, trees and a fountain in front.  You stand before a solid, cement block building standing five stories high, in the middle of a rundown neighborhood, no trees (unless you count the two plastic ones beside the doors and the only fountain you see is.....well you don't see one.  To the [north] is a revolving door that leads in."  The printed name of Outside-Hotel is "Outside Hotel".  Understand "hotel/outside" as outside-hotel.
 
+Section 1.5.1 - Doorman
 
+The doorman is a man in Outside-Hotel.  "[one of]The [doorman] sees you standing there and waves.[or]The [doorman] is standing here beside the door.[stopping]".  The description of doorman is "A friendly enough looking guy.  He's wearing a black suit with black bow tie, white undershirt and has white gloves on.  His hair is slicked neatly back and to the left and his square jaw shows a strong man, yet his eyes, covered in small round spectacles, give him the appearance of someone with a devious mind. [if doorman carries luggage]Your luggage is sitting before him.[end if]"
 
+before going north in outside-hotel for the first time:
+	say "The doorman stops you before you enter, 'Welcome to the Beaumont, the finest establishment in town.  May I have your luggage taken to your room?'[paragraph break]";
+	if player consents:
+		say "[line break]You hand your luggage to the doorman.";
+		now doorman carries luggage;
+	say "[line break]'Is there anything else I can help you with?'" instead;
 
+before going north in outside-hotel for the second time:
+	say "You go through the revolving door into the lobby.";
+	if doorman carries luggage:
+		now luggage is on the king size bed;
+	now doorman is off-stage;
+	now player is in lobby instead.
+	
+Before taking luggage:
+	If doorman carries luggage:
+		say "'I'll just go ahead and carry it myself.  Thanks though.'";
+		now player carries luggage instead.
+
+Section 1.5.2 - Revolving Door
+
+The revolving-door is a door. It is south of the lobby.  The revolving-door is scenery. The revolving-door is open.  The revolving-door is unopenable.  Understand "door/revolving" as revolving-door.  The printed name of revolving-door is "revolving door".  The description of revolving-door is "Large glass three panel revolving door.  The glass looks dusty and dingy."
+
+	
+	
 Part 2 - Second floor
 
 Chapter 2.1 - General things
@@ -676,7 +711,7 @@ Before examining the peep hole:
 
 Chapter 2.9 - Room 203
 
-Room 203 is a room.  "As you stand in your room you see your pleasantly surprised at the grandeur of your accomodations.  [A king size bed] sits in one corner of the room, while a [writing desk] sits in the opposite corner.  Beside the bed is a [night stand] which upon it sits a [table lamp] and a [telephone].  To the north is a small bathroom."
+Room 203 is a room.  The description of room 203 is "As you stand in your room you see your pleasantly surprised at the grandeur of your accomodations.  [A king size bed] sits in one corner of the room, while a [writing desk] sits in the opposite corner.  Beside the bed is a [night stand] which upon it sits a [table lamp] and a [telephone].  To the north is a small bathroom."
 
 A king size bed is a clothed bed.   The king size bed is scenery.  The king size bed is in Room 203.  The description of king size bed is "It looks comfy enough and the sheets look clean."
 A writing desk is a fixed in place supporter in Room 203. The writing desk is scenery.  The description of writing desk is "The desk is just the write size to pen a letter, but probably not large enough to spread out a bunch of paperwork."
@@ -721,31 +756,26 @@ Chapter 90.1 - Baseball game
 baseball-game ends when the umpire is revealed.
 
 When baseball-game begins:
-	say "Your vision blurs and your mind is transported to another place.";
 	pause the game;
-	clear the screen;
 	strip the player;
 	now player is in baseball-field;
 	the Ball-is-missed in two turns from now.
 
 When baseball-game ends:
 	pause the game;
-	clear the screen;
 	restore the player;
+
+Section 90.1.1 - Item Descriptions
 
 Baseball-field is a room.  "You are sitting on the first base side of a [baseball-diamond].  Your son Trevor is up to bat.  Trevor is six and this is his first baseball game.  You feel excited and nervous all at the same time.  The anticipation of him doing well has eaten at you all day.  But most of all the thought of him having fun is forefront.[paragraph break]Trevor on the other hand, is all business.  He comes up to bat, with the ball sitting on the tee and the look on his face tells you that to him, this is the World Series.  To him, this is the most important moment of his life and he's got this under control.[paragraph break][Pam] on the other hand, is sitting beside you, smoking a cigarette, barely seems to notice that Trevor is there.  She's too focused yapping with her friends on her cell, to notice that her own son, her flesh and blood is up to bat."  The printed name of baseball-field is "Baseball Field".
 
 baseball-diamond is a thing in Baseball-field .  The printed name is "baseball diamond".  The description of the baseball-diamond is "You've been to a baseball field before.  Four bases, nine players on the field, a tenth up to bat and up to 3 more on the bases.  An umpire stands behind home plate and coaches stand at first and third base...you know your typically stuff....oh yes, these are all kids and your son is up to bat."  Understand "baseball/diamond" as baseball-diamond when baseball-game is happening.
 
-Instead of examining yourself during baseball-game:
-	say "You are sitting here on the edge of your seat watching your son play ball."
-	
 An umpire is a thing in baseball-field.  The umpire can be revealed or unrevealed.  The umpire is unrevealed.  The description of umpire is "Suited up in his gear like he is umping a professional game, the umpire is taking this game amongst six year olds as serious as one as well."
 
 Pam is in Baseball-field.  The description of Pam is "My wife, still as beautiful as the day we met.  You would never guess she is in her 40s.  But her personality has changed drastically since we first met, and even more so since Trevor was born.[first time][paragraph break]We met in college as freshman, becoming best friends, then lovers and eventually married our senior year.   We held off having children until she became established in her career at the ad agency.  But even then by our mid thirties, I think she gave in to having a baby just so I'd stop bugging her about it.  After Trevor was born, she went right back to work and Trevor became a nuisance to her.....oh she puts on the air of a loving mother in public, but as soon as she is out of the public eye, she is back to thinking only of herself.[only]"
 
-Before going during baseball-game:
-	say "You're not leaving now, your son is playing ball." instead.
+Section 90.1.2 - Scheduled Events
 	
 At the time when the ball-is-missed:
 	say "Trevor swings......and misses.  Now the look of determination is even stronger on his face.  He's not going to miss it this time.";
@@ -763,9 +793,16 @@ At the time when the move-to-home:
 	say "The next batter up, swings hard and dribbles the ball back to the pitcher.  Trevor is already half-way home when the pitcher picks up the ball and makes a throw to home.  The catcher, currently waving at his parents on the other side of the field is not paying attention and Trevor scores easily.  [paragraph break]As Trevor walks off the field, the umpire comes around and begins to brush the dirt off home plate.  As he stands back up, he turns and faces your direction and seemingly looks right at you and you think he is smiling at you.......that face looks familiar.....where have I seen him before.....";
 	now the umpire is revealed
 	
+Section 90.1.3 - Scene specific rules / actions
+
 Before thinking about Trevor while baseball-game is happening:
 	say "Trevor is only six, yet looks so grown up in his baseball gear." instead.
 	
+Instead of examining yourself during baseball-game:
+	say "You are sitting here on the edge of your seat watching your son play ball."
+
+Before going during baseball-game:
+	say "You're not leaving now, your son is playing ball." instead.
 
 Chapter 90.2 - Flight in
 
@@ -775,9 +812,7 @@ flight-scene-state is a kind of value.  the flight-scene-states are part1, part2
 Airplane has a flight-scene-state.  
 
 when flight-in begins:
-	say "Your vision blurs and your mind is transported to another place.";
 	pause the game;
-	clear the screen;
 	strip the player;
 	now the reservation is carried by the player;
 	now the wallet is carried by the player;
@@ -787,7 +822,6 @@ when flight-in begins:
 
 When flight-in ends:
 	pause the game;
-	clear the screen;
 	restore the player;
 	now the reservation is carried by the player;
 	now the wallet is carried by the player;
@@ -804,7 +838,20 @@ The airplane-window is scenery in the airplane.  The printed name of airplane-wi
 
 The dark-figure is an undescribed thing.  The dark-figure can be revealed or unrevealed.  The dark-figure is unrevealed.  dark-figure is in airplane.
 
-[understand "look out/-- [something]" as examining airplane-window.]
+Understand "look out [something]" as searching when flight-in is happening.
+
+instead of searching the elderly lady:
+	say "In her current state, frisking the old lady would not be a smart thing to do."
+	
+instead of searching the airplane-window:
+	try examining the airplane-window.
+
+instead of smelling during flight-in:
+	if elderly lady is on-stage:
+		say "The smell of cigarettes and cheap perfume is going to linger on your clothes for some time.";
+	otherwise:
+		say "With the lady not being right next to you, you'd think the smell of cigarettes and cheap perfume would have faded.....but it hasn't."
+	
 
 Before examining airplane-window when flight-in is happening:
 	if the flight-scene-state of the airplane is part1:
