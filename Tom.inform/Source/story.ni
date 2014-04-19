@@ -1,46 +1,103 @@
 "Tom" by Jason Lautzenheiser
 
-The story genre is "Horror".
-The story creation year is 2013.
-
-Book 1 - Mechanics
-
-Part - General rules and conventions
-
-[This part defines the scenes, some general flags, some verbs and some kinds. It also contains definitions of the introduction, the player character and the included extensions.]
-
-Chapter - General flags
-
-Section - General game properties
-
+[Header Hierarchy Reminder: It goes "volume", "book", "part", "chapter", "section"]
+Release along with website, interpreter, the source text, and library card.
 Use no scoring and full-length room descriptions. [no scoring and verbose descriptions]
 [Use no deprecated features.]
 Use American dialect.
 
-Section - Release
 
-Release along with website, interpreter, the source text, and library card.
+Volume - Bibliography
 
-Section - Includes
+The story genre is "Horror".
+
+The story description is "Checking into the Beaumont Hotel for business, Travis figures he's in for another boring business.  He soon learns otherwise."
+The release number is 1.
+
+The story creation year is 2013.
+
+Volume - Testing & Debugging (not for release)
+
+Book - Tests
+
+test lobby with "n/no".
+
+test reservation with "ask man about hotel room".
+test lounge with "ask man about reservation/e".
+test elevator with "ask man about room/n".
+test elevator-2 with "ask man about room/n/push button/z/z/go in".
+
+Volume - Extensions
 
 Include Basic Screen Effects by Emily Short.
+Include Locksmith by Emily Short.
 Include Plurality by Emily Short.
-[Include Conversation Framework by Eric Eve.
-Include Conversation Responses by Eric Eve.
-Include Conversational Defaults by Eric Eve.]
-Include Keyword Interface by Aaron Reed.
 Include Trinity Inventory by Mikael Segercrantz.
 Include Epistemology by Eric Eve.
 Include Small Kindnesses by Aaron Reed.
+Include Keyword Interface by Aaron Reed.
 
-Section - Includes - Not for release
+Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
 [Include Property Checking by Emily Short.]
 
 [Use library message alerts.]
 
-Section - Definitions 
+Volume - Out of world material
+
+Abouting is an action out of world applying to nothing.
+
+Understand "about" as abouting.
+Understand the command "credits" or "info" as "about".
+
+Report abouting:
+	say "[italic type][Story title][roman type] was created in the fall and winter of 2013-2014.[paragraph break]";
+	say "[italic type][Story title][roman type] is copyright © 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+
+
+	
+Volume - Uberstart
+
+The uberstart rules are a rulebook.
+
+After printing the banner text, say "Copyright © Jason Lautzenheiser 2013. [line break]First time players please type ABOUT."
+
+The time of day is 6:36 PM.
+
+When play begins:
+	follow the uberstart rules.
+	
+An uberstart rule:
+	now the left hand status line is "[the player's surroundings] / Moves: [turn count] ";
+	now the right hand status line is "Time: [time of day]";
+	
+[if we end up supporting glulx title page and such, check out ghosterington-night source for an uberstart rule for title page.]
+
+
+
+[When play begins: 
+	now every scenery thing is keyworded;
+	display the boxed quotation "... Next came one [line break]
+	Who mourned in earnest, when the captive ark[line break]
+	Maimed his brute image, head and hands lopt off,[line break]
+	In his own temple, on the grunsel-edge,[line break]
+	Where he fell flat and shamed his worshippers:[line break]
+	Dagon his name, sea-monster, upward man[line break]
+	And downward fish; yet had his temple high[line break]
+	Reared in Azotus, dreaded through the coast[line break]
+	Of Palestine, in Gath and Ascalon,[line break]
+	And Accaron and Gaza's frontier bounds.[line break]
+[line break]
+	--Paradise Lost - John Milton[paragraph break]";
+	now the left hand status line is
+		"[the player's surroundings] / [turn count] / [score]";
+	now the right hand status line is "Time: [time of day]";
+	now the time of day is 7:13 PM.]
+
+
+
+Volume - Definitions
 
 [these definitions help us define whether there are people in a room or not (other than the player)]
 Definition: a person is another if it is not the player.
@@ -48,23 +105,7 @@ Definition: A room is occupied rather than unoccupied if another person is in it
 
 A fardrop is a kind of backdrop.
 
-Section - Global Variables
-
 The last mentioned thing is a thing that varies.
-
-Section - Rules
-
-The block kissing rule is not listed in any rulebook.
-The kissing yourself rule is not listed in any rulebook.
-
-Section - Actions
-
-Remembering is an action applying to one thing.
-
-To say p:
-	say "[paragraph break]".
-	
-Section - Properties
 
 A person can be neutral, friendly, or angry.  A person is usually neutral.  [use this to control moods of characters]
 A person can be depressed, excited, happy, sad, calm.  A person is usually calm. [Another aspect ot mood fo a character.]
@@ -79,14 +120,31 @@ Everything has some text called texture. The texture of something is usually "".
 
 Parser highlighting is true.
 
-Section - Compilation (for Z-machine only)
+Book - Wakefulness
 
-Use memory economy.
+A person can be tired or rested.  A person is usually rested.
 
-Section - Work arounds
+
+Volume  - Mechanics
+
+Book - General game properties
+
+Chapter - Rules
+
+The block kissing rule is not listed in any rulebook.
+The kissing yourself rule is not listed in any rulebook.
+
+Chapter - Actions
+
+
+
+	
+
+
+Chapter - Work arounds
 
 [The printed name of the player is "yourself". That works really well for messages like "You can't take yourself." It fails miserably for things like NPC reactions, where the NPC may be reacting to another NPC or to the player: "Jemison follows [the leader]." So: a workaround "say" phrase.]
-To say name of (t - a thing):
+[To say name of (t - a thing):
 	if t is the player begin;
 		say "you";
 		mark yourself in output;
@@ -101,8 +159,8 @@ To say name of (t - a thing) is:
 	otherwise;
 		say "[the t] is";
 	end if.
-
-Chapter - General Routines
+]
+Book - General Routines
 
 After printing the name of something (called the target): 
 	change the last mentioned thing to the target.
@@ -111,20 +169,41 @@ To say (regular verb - some text) in correct agreement:
 	  say "[regular verb][if the last mentioned thing is not plural-named]s".
 
 
-Chapter - Verbs
 
-Section - Answer
+Book - Verbs
+
+Part - Remember 
+
+Remembering is an action applying to one thing.
+Instead of remembering something, try examining it instead.
+
+Chapter - Answer
 
 Instead of answering:
 	say "[lame talk]".
 
-Section - Asking
+Chapter - Asking
 
 Rule for reaching inside a room when asking someone about something:
 	  allow access.
 
+Chapter - Examining self
 
-Section - Kissing
+Conds is a list of indexed texts that varies.
+
+check examining yourself:
+	truncate conds to 0 entries;
+	let tiredmsg be indexed text; let tiredmsg be "You are tired and could probably use some rest now";
+	if the player is tired, add tiredmsg to conds;
+	if the number of entries in conds is 0, say "You're not sure what to do next";
+	say "[conds], but otherwise you're doing all right." instead.
+	
+[instead of touching or hugging yourself, try examining yourself.]
+
+
+
+
+Chapter - Kissing
 
 Understand the command "kiss" as something new.
 Understand "kiss [a thing]" as kissing.
@@ -138,7 +217,7 @@ Report kissing:
 			otherwise:
 				say "It's been a year since the divorce, but seriously, you are not so desperate to try kissing [the noun]."
 
-Section - Dropping and Dropping On
+Chapter - Dropping and Dropping On
 
 Understand the command "drop" as something new.
 
@@ -146,7 +225,7 @@ Understand "drop [things preferably held]" as dropping.
 
 Dropping it on is an action applying to two things.  Understand "drop [things preferably held] on [other things]" as putting it on.
 
-Section - Digging
+Chapter - Digging
 
 [Just because everyone is going to do it]
 Digging is an action applying to nothing. Understand "dig" as digging. Specific digging is an action applying to one topic. Understand "dig [text]" as specific digging. Check specific digging: try digging instead.  
@@ -157,7 +236,7 @@ Carry out digging:
 	otherwise:
 		say "You don't really have the proper tools or energy to dig here."
 		
-Section - Smelling
+Chapter - Smelling
 
 [nothing fancy here, but did lift a lot of this from, Hoosegow source - Ben Collins-Sussman, Jack Welch (https://code.google.com/p/hoosegow/),  as I liked the idea of ambient odor that decays over time.]
 
@@ -206,18 +285,22 @@ intensity		verbage
 100		"It stinks to high heaven"		
 
 
-Section - Showing
+Chapter - Showing
 
 Rule for reaching inside a room when the current action is showing:
 	  allow access.
 	  
-Section - Touch
+Chapter - Touch
 
 Instead of touching a fardrop:
 	say "[The noun] is too far away to touch."
+
+Chapter - Look For
+
+Understand "look for [something]" as searching.
 	
 
-Section - Talking
+Chapter - Talking
 
 Talking is an action applying to one thing.  Understand "talk to [something]" as talking.
 
@@ -234,56 +317,30 @@ Check talking:
 To say lame talk:
 	say "You can ASK someone ABOUT something or SHOW something TO someone."
 	
-Section - Telling
+Chapter - Telling
 
 Rule for reaching inside a room when telling someone about something:
 	allow access.
 	
 instead of telling someone about anything:
-	say "There isn't much to tell.[paragraph break]Maybe you could try ASK someone ABOUT something or SHOW something TO someone."	
-Chapter - When the game begins
-
-When play begins:
-	now the left hand status line is "[the player's surroundings] / [turn count] ";
-	now the right hand status line is "Time: [time of day]";
-	now the time of day is 6:36 PM.
-
-
-[When play begins: 
-	now every scenery thing is keyworded;
-	display the boxed quotation "... Next came one [line break]
-	Who mourned in earnest, when the captive ark[line break]
-	Maimed his brute image, head and hands lopt off,[line break]
-	In his own temple, on the grunsel-edge,[line break]
-	Where he fell flat and shamed his worshippers:[line break]
-	Dagon his name, sea-monster, upward man[line break]
-	And downward fish; yet had his temple high[line break]
-	Reared in Azotus, dreaded through the coast[line break]
-	Of Palestine, in Gath and Ascalon,[line break]
-	And Accaron and Gaza's frontier bounds.[line break]
-[line break]
-	--Paradise Lost - John Milton[paragraph break]";
-	now the left hand status line is
-		"[the player's surroundings] / [turn count] / [score]";
-	now the right hand status line is "Time: [time of day]";
-	now the time of day is 7:13 PM.]
-
-
-Chapter - Standard Responses
+	say "There isn't much to tell.[paragraph break]Maybe you could try ASK someone ABOUT something or SHOW something TO someone."
+	
+Book - Standard Responses
 
 Instead of singing: say "Back in the day you thought you were a decent singer, your ex-wife thought differently.  You decide to refrain from singing so as not to subject others to it."
 Instead of saying sorry: say "You mumble apologetically under your breath."
 Instead of pushing or pulling or taking a fixed in place thing: say "You strain to move [the noun], but only succeed in working up a sweat and nothing more[if location is occupied]; well you do garner a few strange looks[end if]."
+Instead of climbing an enterable supporter, try entering the noun.
+Instead of climbing, say "You look for something to pull yourself up with, but find nothing and give up."
+Instead of jumping, say "You used to enjoy jumping, but that was before the divorce, when you enjoyed a lot of things."
+Instead of sleeping,  say "You can't just fall asleep here."
+Instead of waking up, say "While reality can seem like a nightmare, you really are awake."
+Instead of thinking, say "You've done a lot of thinking lately, but this is not the time for idle thoughts."
 
-Chapter - New kinds and actions
+Book - New kinds 
 
-Section - Flashlight
 
-[Because every game has a flashlight doesn't it?]
-
-The description of the flashlight is "This is a normal flashlight.  No batteries so it doesn't work."
-
-Section - Elevator exterior
+Chapter - Elevator exterior
 
 An elevator exterior is an undescribed backdrop.  It is not scenery.   The description of the elevator exterior is "The [o][call button][x] is in the wall to the right of the [if elevator-door is open]open [end if]door.  [dial-description]".  The printed name of elevator exterior is "elevator".
 
@@ -320,7 +377,7 @@ Instead of going inside in the presence of elevator exterior:
 	otherwise:
 		try opening the elevator-door instead.
 		
-Section - Elevator
+Chapter - Elevator
 
 The Lift is a room.  The description of the lift is "The large elevator [if the lift is unoccupied] is empty[end if].  A [three-legged stool], where a elevator jockey would sit, is in front of the elevators [control panel]."  The printed name of the Lift is "The Elevator".
 
@@ -385,44 +442,19 @@ Carry out pressing button:
 	the doors shut in two turns from now;
 	
 		
-Section - Look For
-
-Understand "look for [something]" as searching.
-
-Section - Ask about
 
 
-	
-Section - Thinking about something
 
-Table of Remembering Messages
-rule name	message
-Remembering generic report remembering rule	"I really have no thoughts on [the noun] [line break]"
+Chapter - Luggage
 
-Thinking about is an action applying to one thing.  Understand "Think about [any thing]" as thinking about.
-Understand "Remember [any thing]" as thinking about.	
-understand "examine [any known subject]" or "x [any known subject]" or "look at/for [any known subject]" as remembering.
-
-The allow remembering faraway things rule is listed instead of the basic accessibility rule in the action-processing rules.
-
-This is the allow remembering faraway things rule:
-	unless remembering a subject, abide by the basic accessibility rule.
-
-Report remembering (this is the Remembering generic report remembering rule): say the message corresponding to a rule name of Remembering generic report remembering rule in Table of Remembering Messages.
-
-Before thinking about something (called the subject):
-	instead say "I really have no thoughts on [the subject]."
-
-Section - Luggage
-
-The luggage is a closed openable container.  The description is "Your hard-shell suitcase has served you well all these years. It may look old, but it serves its purpose."  Understand "suitcase" as luggage.
+Some luggage is a closed openable container.  The description is "Your hard-shell suitcase has served you well all these years. It may look old, but it serves its purpose."  Understand "suitcase" as luggage.
 
 Instead of opening luggage when location is not room 203:
 	say "You shouldn't unpack your luggage until you get to your room."
 
 Understand "unpack [something]" as opening.	
 
-Section - Bedrooms
+Chapter - Bedrooms
 
 A bed is a kind of supporter.  A bed is always enterable. 
 
@@ -439,59 +471,19 @@ The description of blanket is usually "The blanks will keep you warm at night."
 
 
 	
-Section - Examining self
-
-Conds is a list of indexed texts that varies.
-
-check examining yourself:
-	truncate conds to 0 entries;
-	let tiredmsg be indexed text; let tiredmsg be "You are tired and could probably use some rest now";
-	if the player is tired, add tiredmsg to conds;
-	if the number of entries in conds is 0, say "You're not sure what to do next";
-	say "[conds], but otherwise you're doing all right." instead.
-	
-[instead of touching or hugging yourself, try examining yourself.]
-
-Section - Wakefulness
-
-A person can be tired or rested.  A person is usually rested.
 
 
-Section  - Prose Name
-
-Every room has some text called prose name. The prose name of a room (called locale) is usually "NULL".   
-
-To say the prose version of (place - a room): if the prose name of place is "NULL", say "[printed name of place]"; otherwise say "[prose name of place]".
+Book - Changes to the world model
 
 
-Chapter - Changes to the world model
-
-Section - General changes
-
-Instead of climbing an enterable supporter, try entering the noun.
-
-Instead of climbing, say "You look for something to pull yourself up with, but find nothing and give up."
-
-Instead of jumping, say "You used to enjoy jumping, but that was before the divorce, when you enjoyed a lot of things."
-
-Instead of sleeping,  say "You can't just fall asleep here."
-
-Instead of waking up, say "While reality can seem like a nightmare, you really are awake."
-
-Instead of thinking, say "You've done a lot of thinking lately, but this is not the time for idle thoughts."
-
-
-Section - Additional lines for USE
+Chapter - Additional lines for USE
 
 Understand "use [a door]" as opening. Understand "use [an open door]" as entering.
 
 
-Section - Miscellaneous 
-
-Understand "plugh" or "xyzzy" or "frotz" or "plover" as a mistake ("When that word leaves your lips, small quiet voices in your head speak haunting words of a time long lost.....a time lost forever.").
 
 
-Section - Sanity Check Rules
+Chapter - Sanity Check Rules
 
 The sanity-check rules are a rulebook.
 This is the sanity-check stage rule:
@@ -509,7 +501,7 @@ instead of switching on or switching off or entering a person:
 	
 
 
-Section - Liquids
+Chapter - Liquids
 
 [Minimal liquid needs for now so don't need the full extension]
 
@@ -543,14 +535,14 @@ Every turn when the player carries a fluid thing (called the puddle):
 	
 		
 	
-Chapter - Subjects
+Book - Subjects
 
 a subject can be remembered or forgotten.  A subject is usually forgotten.
 
 instead of remembering a subject (called whatever):
 	try thinking about whatever instead.
 
-Section - Trevor
+Chapter - Trevor
 
 Trevor is a familiar and seen subject.  Understand "son/kid/child/children" as Trevor. 
 
@@ -558,7 +550,7 @@ Before thinking about Trevor:
 	if baseball-game is not happening:
 		instead say "You remember how Trevor's a great kid and you miss him a lot.  However, being with him reminds you of your failed marriage.  The only good in your life is Trevor and this job.  You're screwing up the relationship with Trevor, but you can't screw up this job.".
 
-Section - Baseball
+Chapter - Baseball
 
 baseball is a familiar and seen subject.
 
@@ -567,15 +559,87 @@ before thinking about baseball:
 	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.";
 	stop the action.
 	
-Chapter - Characters
 
-[some characters you'll see through out the story.  characters that are only in one location may appear in their specific room in code.  Those here tend to be seen in multiple places and scenes.  General information is here, though specific changes based on location / scene may be in those spots.]
 
-Section - Pam
+
+Book - Synonyms and New Grammar
+
+Understand the command "nothing" as listen.  Understand "say nothing" as listening.
+Understand the command "bring" or "grab" as "take".
+Understand the command "see" as "look".
+
+
+Book - Parser Improvements
+
+Chapter - Looking in directions
+
+Check examining a direction (called dir):
+	let rm be the room dir from location;
+	if rm is a room, say "[if dir is up]Above you[otherwise if dir is down]Below you[otherwise if dir is inside]Inside[otherwise if dir is outside]Outside[otherwise]To the [d][dir][x][end if] is [if rm is visited][prose name of rm][otherwise]an unexplored area[end if]." instead;
+	otherwise say "Nothing interesting in that direction." instead.
+	
+Chapter - Get All
+
+After reading a command:
+	if the player's command includes "all":
+		say "You really should just do that to one item at a time.";
+		reject the player's command.
+		
+		
+
+		
+
+Volume - Characters
+
+Book - Travis Moore - The player
+
+The player is Travis.
+Travis is a man. Travis is in Outside-Hotel.
+Travis is neutral and calm.  Travis has a number called current level.  The current level of Travis is 1.
+
+[Instead of examining the player: say "You are relatively handsom, successful executive in the textiles business.  Fourty-three and recently divorced with an eight year old son, [Trevor].  Since you're divorce, you've throw yourself into your work, leaving town, and your son, behind for weeks on end.  Sometimes it's tough to face reality."
+]
+
+Travis is carrying a reservation and luggage.  
+Travis is tired.  The scent of Travis is "[if checking in is happening] of the cheap perfume from the lady sitting next to you on the flight.[end if]"
+
+Part - Reservation 
+
+[only used temporarily in the Checking In scene to give some life to the story]
+
+The reservation is a thing.  The description is "Your reservation states you have a room for 3 nights in this fine establishment."
+Understand "hotel room" or "room" as reservation
+
+before dropping the reservation, instead say "You probably don't want to lose that." 
+
+after examining the reservation for the first time:
+	now baseball is remembered;
+	say "The office manager booked this reservation for you.  Typically he puts you up at a little two bit motel, so not sure why he chose this place....I'm sure it wasn't cheap.[paragraph break]He did make up for it on the flight however by booking you coach.....might as well been in the luggage compartment for all it was worth.  The landing was rough...."
+	
+Part - Wallet
+
+The wallet is a container.  The initial appearance of the wallet is "Your black leather wallet has been with you for a good number of years."  The description of the wallet is "The black leather is cracked, but the wallet still serves it's purpose."
+
+Travis is carrying the wallet.
+
+Part - Photo of son
+
+The photo-of-trevor is a thing.   The description of photo-of-trevor  is "This photo of your son is a bit ragged from the constant viewing of it as you reminisce on better days.  The photo shows Trevor and you together after his first baseball game when he was just six."
+
+after examining photo-of-trevor for the first time:
+	now baseball is remembered;
+	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.[paragraph break][first time]Your vision blurs and your mind is transported to another place....[only]".
+
+The photo-of-trevor is in the wallet.  The printed name of photo-of-trevor is "photo"
+
+Understand "photo/photograph/picture" as photo-of-trevor 
+
+
+Book - Pam
 
 Pam is a woman.  
 
-Section - Tom
+Book - Tom
 
 [Tom is our central NPC, he will appear throughout, but often as complete different person objects, but here is our main one]
 
@@ -591,99 +655,7 @@ Every tom wears a black suit, a bowtie and some spectacles.
 Every tom sometimes wears white gloves.
 
 
-
-Chapter - The player character
-
-The player is in Outside-Hotel.
-The player is neutral and calm.
-The player has a number called current level.  The current level of the player is 1.
-
-[Instead of examining the player: say "You are relatively handsom, successful executive in the textiles business.  Fourty-three and recently divorced with an eight year old son, [Trevor].  Since you're divorce, you've throw yourself into your work, leaving town, and your son, behind for weeks on end.  Sometimes it's tough to face reality."
-]
-
-The player is carrying a reservation and luggage.  The player wears the fedora hat.
-The player is tired.  The scent of the player is "[if checking in is happening] of the cheap perfume from the lady sitting next to you on the flight."
-
-Section - Reservation 
-
-[only used temporarily in the Checking In scene to give some life to the story]
-
-The reservation is a thing.  The description is "Your reservation states you have a room for 3 nights in this fine establishment."
-Understand "hotel room" or "room" as reservation
-
-before dropping the reservation, instead say "You probably don't want to lose that." 
-
-after examining the reservation for the first time:
-	now baseball is remembered;
-	say "The office manager booked this reservation for you.  Typically he puts you up at a little two bit motel, so not sure why he chose this place....I'm sure it wasn't cheap.[paragraph break]He did make up for it on the flight however by booking you coach.....might as well been in the luggage compartment for all it was worth.  The landing was rough...."
-	
-	
-Section - Fedora hat
-
-The fedora hat is a wearable thing.  The description is "Your trusty fedora has seen better days, but it's black trim-ribbon, while slightly frayed, still holds the feather your son found on your trip last year to the beach."
-Understand "trim-ribbon" or "ribbon/trim/feather" as fedora hat.
-
-	
-Section - Wallet
-
-The wallet is a container.  The initial appearance of the wallet is "Your black leather wallet has been with you [if fedora hat is familiar]almost as long as your hat[otherwise] for a good number of years[end if]."  The description of the wallet is "The black leather is cracked, but the wallet still serves it's purpose."
-
-The player is carrying the wallet.
-
-Section - Photo of son
-
-The photo-of-trevor is a thing.   The description of photo-of-trevor  is "This photo of your son is a bit ragged from the constant viewing of it as you reminisce on better days.  The photo shows Trevor and you together after his first baseball game when he was just six."
-
-after examining photo-of-trevor for the first time:
-	now baseball is remembered;
-	say "Trevor loved to play baseball.  From his first game in tee-ball, you knew he would be something special.  The joy on his face as he played....was indescrible, something you'll never forget.[paragraph break]Now that part of your life is behind you....oh he mentions his games to you the few times a year you see him, but you have not experienced the joy of him in the game since that first year.[paragraph break][first time]Your vision blurs and your mind is transported to another place....[only]".
-
-The photo-of-trevor is in the wallet.  The printed name of photo-of-trevor is "photo"
-
-Understand "photo/photograph/picture" as photo-of-trevor 
-
-
-Chapter - Synonyms and New Grammar
-
-Understand the command "nothing" as listen.  Understand "say nothing" as listening.
-Understand the command "bring" or "grab" as "take".
-Understand the command "see" as "look".
-
-
-Chapter - Parser Improvements
-
-Section - Looking in directions
-
-Check examining a direction (called dir):
-	let rm be the room dir from location;
-	if rm is a room, say "[if dir is up]Above you[otherwise if dir is down]Below you[otherwise if dir is inside]Inside[otherwise if dir is outside]Outside[otherwise]To the [d][dir][x][end if] is [if rm is visited][prose name of rm][otherwise]an unexplored area[end if]." instead;
-	otherwise say "Nothing interesting in that direction." instead.
-	
-Section - Get All
-
-After reading a command:
-	if the player's command includes "all":
-		say "You really should just do that to one item at a time.";
-		reject the player's command.
-		
-		
-
-		
-Part - Rooms / Regions
-
-Chapter - Outside Region
-
-The reg-outside is a region.  Outside-Hotel is part of reg-outside.
-The sky is a fardrop in reg-outside.  The description of the sky is "The closer you got to the hotel, the sky darkened with clouds."
-
-
-Chapter - Outside Hotel
-
-Outside-Hotel is a room.  Outside-Hotel is south of revolving-door.  "The hotel you're staying at is the premier hotel in this town, well actually it's the only one these days.   The brochure you read on the flight, showed you a lavish building with a country view, trees and a fountain in front.  You stand before an incredibly ornate building standing five stories high, in the middle of a [rundown neighborhood].  Despite what the brochure may have said, you see no fountain nor any trees.  To the [north] is a revolving door that leads in."  The printed name of Outside-Hotel is "Outside Hotel".  The prose name of outside-hotel is "outside hotel". Understand "hotel/outside/building" as outside-hotel.
-
-	
-
-Section - Doorman
+Part - Doorman
 
 [This may be Tom in another guise, but lets' make him a seperate person in code for ease of coding]
 The doorman is a tom in Outside-Hotel.  "[one of]The [doorman] sees you standing there and waves.[or]The [doorman] is standing here beside the door.[stopping]".  
@@ -729,93 +701,7 @@ topic											answer-text
 To say luggage-doorman:
 	say "I[if doorman carries luggage] will[otherwise] can[end if] have those delivered to your room for you"
 	
-	
-Section - Revolving Door
-
-The revolving-door is a door. It is south of the lobby.  The revolving-door is scenery. The revolving-door is open.  The revolving-door is unopenable.  Understand "door/revolving" as revolving-door.  The printed name of revolving-door is "revolving door".  The description of revolving-door is "Large glass three panel revolving door.  The glass looks dusty and dingy."
-
-
-Section - Run down neighborhood
-
-The rundown neighborhood is a backdrop in outside-hotel.   The description of rundown neighborhood is "As you look around the neighborhood, you notice that many of the buildings are rundown, some boarded up and those that aren't look unkempt with peeling paint and tattered signs.  It's a virtual ghost town.  How this hotel survived you don't understand."  The scent of rundown neighborhood is "of decay and stale trash left to blow around the neighborhood."
-
-understand "ghost town" as rundown neighborhood.
-
-Instead of taking the rundown neighborhood, say "Where would you take it?  Could you really take it away from here?  And would it really do any good?"
-
-Instead of listening to the rundown neighborhood, say "It is unusually quiet around here, even for it being so decrepit around here.  No car horns, no children playing in the street, no banter of the neighborhood folk...nothing."
-
-Section - Fountain
-
-The fountain is scenery in outside-hotel.  
-Before doing anything to the fountain:
-	instead say "If there was one here, you'd give it a try."
-
-Section - Trees
-
-A tree is scenery in outside-hotel. The printed plural name of tree is "trees".  understand "trees" as tree.
-Before doing anything to the tree:
-	instead say "If there were any around, you'd certainly try."
-
-
-
-
-
-Chapter - First Floor Region
-
-reg-first-floor is a region.   The Lobby, hotel-lounge, first-floor-by-elevator are in reg-first-floor.
-
-After deciding the scope of the player:
-	if the location is the lobby, place the elevator exterior in scope;
-	if the location is the hotel-lounge, place the bartender in scope.
-
-Chapter - Hotel Lobby
-
-The Lobby is a room.  "[first time]As you come in through the [revolving-door] to the south, you pause to to a look around at the hotel you'll call home for the next three days.[only]The [marble floor] gleams with fresh polish and reflects the large [crystal chandelier] that hangs overhead.   Along the west wall is a large [fireplace], with a modest fire going that is taking the chill off the cool November air.  Above the fireplace hangs a large [oil portrait] of a man.
-
-[if the desk clerk  is not recognized]The desk clerk stands behind the counter along the north wall, appearing bored as he looks at [the paperwork] in front of him, but you suspect that he sees and knows more than he first appears.[otherwise]Tom is behind the counter, shuffling through some paperwork.[end if]
-
-As you look around you see the [elevator exterior] to the [north] just past the counter and [if the hotel-lounge is visited]to the [east] is a smokey lounge[otherwise]from the [east] cigarette smoke hangs just inside a darkened doorway[end if].  The [south] is the [revolving-door] that will take you back out on the street."
-
-the counter is a supporter, enterable and scenery in the lobby.  The description of the counter is "The counter is simply a way to keep you away from the other side."
-
-The paperwork is scenery on the counter.  The description of paperwork is "As you peer at his paperwork [if the desk clerk is not recognized]the desk clerk[otherwise]Tom[end if] glares at you and says, 'Excuse me!'".
-
-instead of taking paperwork:
-	try examining paperwork.  
-
-instead of pushing paperwork:
-	 say "As you move to brush the paperwork aside, [name-of-desk-clerk] quickly grabs your arm to stop you and then only after glaring at you, lets you go."
-
-Rule for reaching inside a room:
-	say "You are not close enough to to do that.";
-	deny access.
-	
-before going south in Lobby:
-	say "You don't want to leave before your business is done." instead.
-	
-The marble floor is scenery in the lobby.
-The crystal chandelier is scenery in the lobby.
-The fireplace is scenery in the lobby.
-The oil portrait is a fixed in place thing in the lobby.  The oil portrait is undescribed.  The description of the oil portrait is "The portrait is of a [if the desk clerk is familiar]familiar looking [end if]man with a stern look on his face, glasses that make his eyes look exceptionally beady, a black suit coat and a black bow-tie."
-
-Section - Room 203 Key
-
-The inventory listing of the room-203-key is "the [o]key[x] to room 203".  Understand "key/skeleton" or "skeleton key" or "203 key" or "room 203 key" as room-203-key.  The printed name of room-203-key is "Room 203 key".
-
-Before examining room-203-key:
-	if room-203-key is unfamiliar:
-		say "You see a lot of keys hanging behind the counter, but you see nothing special about them." instead;
-	otherwise:
-		say "An old skeleton key with 203 embossed along the shaft." instead.
-		
-before taking the room-203-key:
-	if room-203-key is carried by the desk clerk:
-		say "'Whoa...let me see about your reservation first.  Then I can give you a key.'" instead.
-
-before dropping the room-203-key, instead say "You really don't want to face [the desk clerk] again if you would lose that."
-
-Section - Desk Clerk
+Part - Desk Clerk
 
 [again this is tom, but lets create a different object here]
 
@@ -838,40 +724,141 @@ To say Name-of-desk-clerk:
 
 the description of the desk clerk is "[Name-of-desk-clerk] is wearing [a list of things worn by desk clerk].  His hair is slicked back and to the left neatly and his oblong face and square jaw give him a look of an anvil.  His small round spectacles make his eyes appears especially beady on such a large head."
 
+after examining the desk clerk for the first time, now desk clerk is recognized.
+
 The desk clerk carries room-203-key.  The room-203-key is unseen.
 
-[after saying hello to desk clerk:
-	say "As you walk up to the [counter], [if desk clerk is recognized]Tom[otherwise]the desk clerk[end if] looks up, quickly appraising you and then offers a disinterested, '[if desk clerk is recognized]You again?[otherwise]My name is Tom,[end if] what do you want?'";
-	now the desk clerk is recognized.
+understand "reservation" or "room" or "my room" or "my reservation" as "[room-words]".
+understand "fish" or "fishbowl" or "fish bowl" or "bowl" as "[fish-words]".
 
-before saying hello to desk clerk:
-	if desk clerk is current interlocutor:
-		say "He looks at you and taps his fingers on the counter waiting for you to say something important." instead;
-		stop the action.
-
-Implicit greeting response for the desk clerk:
-	say "[The desk clerk] looks up at you, slightly disturbed that you interrupted him in whatever he was doing.  [paragraph break]".
-
-default ask response for the desk clerk:
-	say "[one of]'I really wouldn't know about that.'[or]'Really sir, I'm quite busy and don't have time for such silly questions.'[or]Tom sighs, 'Do I really have to tell you about that?'[in random order]".
-
-Response of the desk clerk when asked about the desk clerk: instead say "'I[']m here to serve you, just ask me about anything.'".
-Response of the desk clerk when asked about room-203-key: instead say "'As soon as I check out your reservation, I will give you your key.'".
-Response of the desk clerk when asked about room-203-key and room-203-key is familiar: instead say "'I[']ve already given you your key.'".
-Response of the desk clerk when asked about reservation: 
-	say "'Do you have a reservation?' he asks. [paragraph break]'Yes, the last name is Moore.'[paragraph break]Tom pulls out his reservation book, looks you up and quickly puts away the book as if you would try to steal it.[paragraph break]'Room 203', he says hurridly.   He hands you your keys and looks back down to his work as if you had never existed.[paragraph break]";
-	move the room-203-key to the player;
-	now reservation is off-stage;
-	say "You take the large skeleton key, thinking it strange that a top-rated hotel, in this day and age still use these antiquated keys.";
-	now room-203-key is familiar.
-Response of the desk clerk when asked about reservation and room-203-key is familiar: instead say "'I[']ve given you your key already....is there something else I can help you with?'".	
-]
+instead of asking desk clerk about "[fish-words]":
+	say "'Aren't they lovely?'', [name-of-desk-clerk] replies, 'They are like family to me...'[paragraph break]He looks longingly at the fish for a moment, stops and then glares at you through his spectacles.[paragraph break]'Don't mess with my family...', he threatens."
 	
+
+Instead of asking desk clerk about a topic listed in the Table of Deskclerk Questions:
+	say "[Name-of-desk-clerk] replies, '[answer-text entry].'[paragraph break]";
+
+Table of Deskclerk Questions
+topic											answer-text
+"luggage" or "bags"											"[luggage-deskclerk]"
+"key" or "room 203 key" or "room key"											"[if checking in is happening]You'll need one if you'd like to get to your room[otherwise]Yep, that's the key to your room[end if]"
+"doorman" or "door man"											"A little too friendly if you ask me, I don't know why anyone should be that happy"
+"hotel" or "Beaumont"											"The elite establishment in this town.....once you spend a night with us, you'll never want to leave"
+
+To say luggage-deskclerk:
+	if checking in is happening or finding your room is happening:
+		say "[if luggage is carried by player]I really don't care about your [topic understood], you should have handed them to the doorman out front....you'll just have to drag them to your room yourself[otherwise]You gave your [topic understood] to the doorman did you not?  He'll take care of it for you";
+	otherwise:
+		if luggage is carried by player:
+			say "It appears that you are carrying your [topic understood] right now";
+		otherwise:
+			say "Your [topic understood] is in [location of luggage], right where you left it".
 	
 
 
+Part - Bartender
 
-Section - Fishbowl
+The bartender is a Tom.  
+
+Before examining or searching the bartender when bartender is off-stage:
+	instead say "I look around the room, but do not see anyone that looks like they may work here."
+	
+	
+Volume - Locations
+
+Book - Outside Region
+
+The reg-outside is a region.  Outside-Hotel is part of reg-outside.
+The sky is a fardrop in reg-outside.  The description of the sky is "The closer you got to the hotel, the sky darkened with clouds."
+
+
+Book - Outside Hotel
+
+Outside-Hotel is a room.  Outside-Hotel is south of revolving-door.  "The hotel you're staying at is the premier hotel in this town, well actually it's the only one these days.   The brochure you read on the flight, showed you a lavish building with a country view, trees and a fountain in front.  You stand before an incredibly ornate building standing five stories high, in the middle of a [rundown neighborhood].  Despite what the brochure may have said, you see no fountain nor any trees.  To the [north] is a revolving door that leads in."  The printed name of Outside-Hotel is "Outside Hotel".  The prose text of outside-hotel is "outside hotel". Understand "hotel/outside/building" as outside-hotel.
+
+Part - Revolving Door
+
+The revolving-door is a door. It is south of the lobby.  The revolving-door is scenery. The revolving-door is open.  The revolving-door is unopenable.  Understand "door/revolving" as revolving-door.  The printed name of revolving-door is "revolving door".  The description of revolving-door is "Large glass three panel revolving door.  The glass looks dusty and dingy."
+
+
+Part - Run down neighborhood
+
+The rundown neighborhood is a backdrop in outside-hotel.   The description of rundown neighborhood is "As you look around the neighborhood, you notice that many of the buildings are rundown, some boarded up and those that aren't look unkempt with peeling paint and tattered signs.  It's a virtual ghost town.  How this hotel survived you don't understand."  The scent of rundown neighborhood is "of decay and stale trash left to blow around the neighborhood."
+
+understand "ghost town" as rundown neighborhood.
+
+Instead of taking the rundown neighborhood, say "Where would you take it?  Could you really take it away from here?  And would it really do any good?"
+
+Instead of listening to the rundown neighborhood, say "It is unusually quiet around here, even for it being so decrepit around here.  No car horns, no children playing in the street, no banter of the neighborhood folk...nothing."
+
+Part - Fountain
+
+The fountain is scenery in outside-hotel.  
+Before doing anything to the fountain:
+	instead say "If there was one here, you'd give it a try."
+
+Part - Trees
+
+A tree is scenery in outside-hotel. The printed plural name of tree is "trees".  understand "trees" as tree.
+Before doing anything to the tree:
+	instead say "If there were any around, you'd certainly try."
+
+Book - Floors
+
+Table of Floors 
+level	floor
+1	first-floor-by-elevator
+2	second-floor-by-elevator
+3	third-floor-by-elevator
+
+Book - First Floor Region
+
+reg-first-floor is a region.   The Lobby, hotel-lounge, first-floor-by-elevator are in reg-first-floor.
+
+After deciding the scope of the player:
+	if the location is the lobby, place the elevator exterior in scope;
+	if the location is the hotel-lounge, place the bartender in scope.
+
+Book - Hotel Lobby
+
+The Lobby is a room.  "[first time]As you come in through the [revolving-door] to the south, you pause to to a look around at the hotel you'll call home for the next three days. [only]The [marble floor] gleams with fresh polish and reflects the large [crystal chandelier] that hangs overhead.   Along the west wall is a large [fireplace], with a modest fire going that is taking the chill off the cool November air.  Above the fireplace hangs a large [oil portrait] of a man.
+
+[if the desk clerk  is not recognized]The desk clerk stands behind the counter along the north wall, appearing bored as he looks at [the paperwork] in front of him, but you suspect that he sees and knows more than he first appears.[otherwise]Tom is behind the counter, shuffling through some paperwork.[end if]
+
+As you look around you see the [elevator exterior] to the [north] just past the counter and [if the hotel-lounge is visited]to the [east] is a smokey lounge[otherwise]from the [east] cigarette smoke hangs just inside a darkened doorway[end if].  The [south] is the [revolving-door] that will take you back out on the street."
+
+the counter is a supporter, enterable and scenery in the lobby.  The description of the counter is "The counter is simply a way to keep you away from the other side."
+
+The paperwork is scenery on the counter.  The description of paperwork is "As you peer at his paperwork [if the desk clerk is not recognized]the desk clerk[otherwise]Tom[end if] glares at you and says, 'Excuse me!'".
+
+instead of taking paperwork:
+	try examining paperwork.  
+
+instead of pushing paperwork:
+	 say "As you move to brush the paperwork aside, [name-of-desk-clerk] quickly grabs your arm to stop you and then only after glaring at you for a moment, lets it go."
+
+Rule for reaching inside a room:
+	say "You are not close enough to to do that.";
+	deny access.
+	
+before going south in Lobby:
+	say "You don't want to leave before your business is done." instead.
+	
+The marble floor is scenery in the lobby.
+The crystal chandelier is scenery in the lobby.
+The fireplace is scenery in the lobby.
+The oil portrait is a fixed in place thing in the lobby.  The oil portrait is undescribed.  The description of the oil portrait is "The portrait is of a [if the desk clerk is familiar]familiar looking [end if]man with a stern look on his face, glasses that make his eyes look exceptionally beady, a black suit coat and a black bow-tie."
+
+Part - Room 203 Key
+
+The inventory listing of the room-203-key is "the [o]key[x] to room 203".  Understand "key/skeleton" or "skeleton key" or "203 key" or "room 203 key" as room-203-key.  The printed name of room-203-key is "Room 203 key".
+
+The description of room-203-key is "An old skeleton key with 203 embossed along the shaft."
+
+before dropping the room-203-key, instead say "You really don't want to face [name-of-desk-clerk] again if you would lose that."
+
+
+Part - Fishbowl
 
 The fishbowl is a transparent open container.  The fishbowl is on the counter.  Understand "bowl" or "'fish bowl" as fishbowl.
 
@@ -892,11 +879,11 @@ instead of taking anything contained by the fishbowl:
 before doing something other than taking or examining the fishbowl:
 	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if]glares at you and you decide to rethink doing that." instead.
 	
-Chapter - Hotel Lounge
+Book - Hotel Lounge
 
 The hotel-lounge is a room.  "You walk into the smokey bar noticing just [a few people] scattered here and there, though everyone is sitting alone.  Curiously, everyone here is dressed in [1920s period clothing], though we are a long way from that.  The bar is along the north wall, but the [bartender] is no where to be seen.  The lobby is back to the west."  The hotel-lounge is east of the lobby.  Understand "lounge" as hotel-lounge.
 
-Section - General Things
+Part - General Things
 
 The 1920s period clothing are an undescribed thing in the hotel-lounge. the description of 1920s period clothing is "The men are wearing short suit jackets mostly unbuttoned as they lean over their glass deep in thought."
 Understand "jacket/jackets/suit/suits" as 1920s period clothing.
@@ -907,33 +894,24 @@ The drinks is an undescribed thing in hotel-lounge.  The description of drinks i
 The cigarettes are an undescribed thing in hotel-lounge.  The description of cigarettes is "Lit, but mostly unsmoked and ignored.  The ashes are deep on the end of each."
 The ladies are an undescribed thing in hotel-lounge.  The description of ladies is "Well you don't see any here, but you figure there should be some around here somewhere."
 
-Section - Bartender
 
-The bartender is a person.  
-
-Before examining or searching the bartender when bartender is off-stage:
-	instead say "I look around the room, but do not see anyone that looks like they may work here."
-
-Chapter - Main Floor by the Elevator
+Book - Main Floor by the Elevator
 
 first-floor-by-elevator is a room. "You stand outside the [if elevator-door is open]opened [end if][o]elevator[x].  [The description of elevator exterior]".  The first-floor-by-elevator is north of lobby.  The printed name is "First floor by the elevator".
 
 The elevator exterior is in first-floor-by-elevator.  
-
-
-
-
-Chapter - Second floor region
+	
+Book - Second floor region
 
 reg-second-floor is a region.  second-floor-by-elevator, outside-room-203, vending area and room 203 is in reg-second-floor.
 
-Chapter - Second Floor by the Elevator
+Book - Second Floor by the Elevator
 
 second-floor-by-elevator is a room.  The description of second-floor-by-elevator  is "You stand outside the [if elevator-door is open]opened [end if][o]elevator[x] on the second floor.  To the south is a hallway where you can see a row of doors to the rooms on this floor.  To the east is an area with vending machines.  [paragraph break][The description of elevator exterior]".  The printed name is "Second floor by the elevator".
 
 The elevator exterior is in second-floor-by-elevator .
 
-Chapter - Outside room 203
+Book - Outside room 203
 
 Outside-room-203 is a room.  "You are standing outside room room.  On the [o][massive oak door][x] to the east are [o]large brass numbers[x] that ensure there is no mistaking what room this is.  Set in the center of the door just below the numbers is [o][the peep hole][x]."
 
@@ -943,7 +921,7 @@ The printed name is "Outside Room 203".
 
 Outside-room-203 is south of second-floor-by-elevator.
 
-Chapter - Room 203 door
+Part - Room 203 door
 
 The massive oak door is an  door.  It is east of outside-room-203 and west of room 203.  the massive oak door is closed and locked.   The description of the massive oak door is "This large oak door you room number 203 in large brass numbers and a peep hole below them.  It is an old door is worn, yet you know it's still very sturdy."
 
@@ -959,7 +937,7 @@ Before examining the peep hole:
 
 
 
-Chapter - Room 203
+Book - Room 203
 
 Room 203 is a room.  The description of room 203 is "As you stand in your room you see your pleasantly surprised at the grandeur of your accomodations.  [A king size bed] sits in one corner of the room, while a [writing desk] sits in the opposite corner.  Beside the bed is a [night stand] which upon it sits a [table lamp] and a [telephone].  To the north is a small bathroom."
 
@@ -971,39 +949,30 @@ The telephone is a thing on the night stand.  The description of the telephone i
 
 Room 203 is east of the massive oak door.  
 
-Chapter - Vending area
+Book - Vending area
 
 Vending Area is a room.  Vending Area is east of second-floor-by-elevator .
 
 
-
-Chapter - Third floor region
+Book - Third floor region
 
 reg-third-floor is a region.  third-floor-by-elevator is in reg-third-floor.
 
-Chapter - Third Floor by the Elevator
+Book - Third Floor by the Elevator
 
 third-floor-by-elevator  is a room.  The printed name is "Third floor by the elevator"
 
 The elevator exterior is in third-floor-by-elevator.
 
-Chapter - Inside hotel region
+Book - Inside hotel region
 
-reg-inside is a region.  reg-first-floor, reg-second-floor, reg-third-floor and the lift are part of reg-inside.
+reg-inside is a region.  reg-first-floor, reg-second-floor, reg-third-floor and the lift are part of reg-inside.	
 
-Chapter - Floors
+Volume - Scenes
 
-Table of Floors 
-level	floor
-1	first-floor-by-elevator
-2	second-floor-by-elevator
-3	third-floor-by-elevator
+Book -  Game Scenes
 
-Book 2 - Scenes
-
-Part - Normal Scenes
-
-Chapter - Checking in
+Part - Checking in
 
 Checking In is a scene.  Checking In begins when play begins.  Checking In ends when player carries the room-203-key for the first time.
 
@@ -1016,13 +985,26 @@ before going direction during Checking In:
 Every turn during Checking In:
 	if a random chance of 1 in 20 succeeds:
 		if player is in Lobby:
-			say "[one of][name-of-desk-clerk] looks at the fish intensly.[or][name-of-desk-clerk] taps gently on the fishbowl.[or][name-of-desk-clerk] reaches under the counter and throw a small piece of food which the fish devour.[then at random]" in sentence case
+			say "[one of][name-of-desk-clerk] looks at the fish intensly.[or][name-of-desk-clerk] taps gently on the fishbowl.[or][name-of-desk-clerk] reaches under the counter and throw a small piece of food which the fish devour.[then at random][paragraph break]" in sentence case
 
-Chapter - Finding your room
+instead of asking desk clerk about "[room-words]" during checking in:
+	say "'What is your name sir?', asks [name-of-desk-clerk][paragraph break]'Moore.....Travis Moore', you say while handing him your reservation.[paragraph break]";
+	now reservation is off-stage;
+	say "[Name-of-desk-clerk] looks at the paper you hand him, crumples it up and throws it over his shoulder.[paragraph break]";
+	say "'Travis Moore you say?', he speaks under his breath as he pulls out a large book and proceeds to flip through the pages.[paragraph break]'Ahhh, yes.  Here you are, one Travis Moore....yes, you are in room 203.'[paragraph break]With that, he closes the book, puts it back under the counter and hands you your room key, a large skeleton key.";
+	move the room-203-key to the player;
+	now room-203-key is familiar;
+
+
+Part - Finding your room
 
 Finding your room is a scene.  Finding your room begins when checking in ends.  Finding your room ends when player is in room 203 for the first time.
 
-Part - Flashbacks
+instead of asking desk clerk about "[room-words]" during finding your room:
+	say "I[']ve given you your key already....I'm not going to carry you up there too."
+
+
+Book -  Flashbacks
 
 Dream is a region.  baseball-field and airplane are part of dream.
 
@@ -1041,7 +1023,7 @@ To restore the player:
 	now every thing in the wardrobe is worn by the player; 
 	move the player to saved location.
 
-Chapter - Baseball game
+Part - Baseball game
 
 baseball-game is a flashback scene.  Baseball-game begins when photo-of-trevor is familiar for the first time.
 
@@ -1057,7 +1039,7 @@ When baseball-game ends:
 	pause the game;
 	restore the player;
 
-Section - Item Descriptions
+Chapter - Item Descriptions
 
 Baseball-field is a room.  "You are sitting on the first base side of a [baseball-diamond].  Your son Trevor is up to bat.  Trevor is six and this is his first baseball game.  You feel excited and nervous all at the same time.  The anticipation of him doing well has eaten at you all day.  But most of all the thought of him having fun is forefront.[paragraph break]Trevor on the other hand, is all business.  He comes up to bat, with the ball sitting on the tee and the look on his face tells you that to him, this is the World Series.  To him, this is the most important moment of his life and he's got this under control.[paragraph break][Pam] on the other hand, is sitting beside you, smoking a cigarette, barely seems to notice that Trevor is there.  She's too focused yapping with her friends on her cell, to notice that her own son, her flesh and blood is up to bat."  The printed name of baseball-field is "Baseball Field".
 
@@ -1067,7 +1049,7 @@ An umpire is a thing in baseball-field.  The umpire can be revealed or unreveale
 
 Pam is in Baseball-field.  The description of Pam is "My wife, still as beautiful as the day we met.  You would never guess she is in her 40s.  But her personality has changed drastically since we first met, and even more so since Trevor was born.[first time][paragraph break]We met in college as freshman, becoming best friends, then lovers and eventually married our senior year.   We held off having children until she became established in her career at the ad agency.  But even then by our mid thirties, I think she gave in to having a baby just so I'd stop bugging her about it.  After Trevor was born, she went right back to work and Trevor became a nuisance to her.....oh she puts on the air of a loving mother in public, but as soon as she is out of the public eye, she is back to thinking only of herself.[only]"
 
-Section - Scheduled Events
+Chapter - Scheduled Events
 	
 At the time when the ball-is-missed:
 	say "Trevor swings......and misses.  Now the look of determination is even stronger on his face.  He's not going to miss it this time.";
@@ -1085,7 +1067,7 @@ At the time when the move-to-home:
 	say "The next batter up, swings hard and dribbles the ball back to the pitcher.  Trevor is already half-way home when the pitcher picks up the ball and makes a throw to home.  The catcher, currently waving at his parents on the other side of the field is not paying attention and Trevor scores easily.  [paragraph break]As Trevor walks off the field, the umpire comes around and begins to brush the dirt off home plate.  As he stands back up, he turns and faces your direction and seemingly looks right at you and you think he is smiling at you.......that face looks familiar.....where have I seen him before.....";
 	now the umpire is revealed
 	
-Section - Scene specific rules / actions
+Chapter - Scene specific rules / actions
 
 Before thinking about Trevor while baseball-game is happening:
 	say "Trevor is only six, yet looks so grown up in his baseball gear." instead.
@@ -1096,7 +1078,7 @@ Instead of examining yourself during baseball-game:
 Before going during baseball-game:
 	say "You're not leaving now, your son is playing ball." instead.
 
-Chapter - Flight in
+Part - Flight in
 
 flight-in is a flashback scene.  flight-in begins when reservation is familiar for the first time.
 
@@ -1110,7 +1092,6 @@ when flight-in begins:
 	strip the player;
 	now the reservation is carried by the player;
 	now the wallet is carried by the player;
-	now the fedora hat is worn by the player;
 	now player is in airplane;
 	airplane-scene-2 happens in one turn from now.
 
@@ -1119,10 +1100,9 @@ When flight-in ends:
 	restore the player;
 	now the reservation is carried by the player;
 	now the wallet is carried by the player;
-	now the fedora hat is worn by the player;
 
 	
-Section - Item descriptions
+Chapter - Item descriptions
 	
 Airplane is a room.  The description of airplane is "[one of]....you're coming in hard for the landing.  Not sure what is going on, but the pilot gave an announcement moments before landing letting us know it was going to be a rough one.  He wasn't mistaken.  Jostled about, you're wondering how the plane manages to stay together, as you sure feel like you're being shaken apart.  The old lady beside you almost rolls in your lap, partially from the jostle, but I think she is truly frightened and you're the closest thing to cling to.[or]You're sitting in coach [if elderly lady is on-stage]beside a heavy [elderly lady] that smells of perfume and cigarettes[end if].[stopping]". 
 
@@ -1163,7 +1143,7 @@ As you hand her the purse, you turn back towards the window.....and the figure i
 
 
 		
-Section - Scheduled events
+Chapter - Scheduled events
 
 at the time when airplane-scene-2 happens:
 	say "The plane has finally landed...after bouncing up and down the runway a few times and is now slowly rolling to a stop.  You are none the worse for wear, despite being a bit frazzled.  The old lady on the other hand appears to be gasping for breath, she is extremely agitated and seems near to panicking.  You try to calm her down by talking to here about her family.
@@ -1193,16 +1173,16 @@ As you climb up, your eyes pass over the window and you pause to look as you get
 	now elderly lady is off-stage;
 	now flight-scene-state of airplane is part3.
 	
-Section - Scene specific rules / actions
+Chapter - Scene specific rules / actions
 
 instead of jumping during flight-in:
 	say "You're currently strapped in and need to stay that way until the flight has ended."
 
-Book 3 - Testing & Debugging (not for release)
 
-Chapter - Tests
 
-test reservation with "ask man about hotel room".
-test lounge with "ask man about reservation/e".
-test elevator with "ask man about room/n".
-test elevator-2 with "ask man about room/n/push button/z/z/go in".
+
+Volume - Easter Eggs
+
+Understand "plugh" or "xyzzy" or "frotz" or "plover" as a mistake ("When that word leaves your lips, small quiet voices in your head speak haunting words of a time long lost.....a time lost forever.").
+
+
