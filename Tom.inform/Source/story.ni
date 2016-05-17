@@ -3,9 +3,7 @@
 [Header Hierarchy Reminder: It goes "volume", "book", "part", "chapter", "section"]
 Release along with website, interpreter, the source text, and library card.
 Use no scoring and full-length room descriptions. [no scoring and verbose descriptions]
-[Use no deprecated features.]
 Use American dialect.
-
 
 Volume - Bibliography
 
@@ -14,7 +12,7 @@ The story genre is "Horror".
 The story description is "Checking into the Beaumont Hotel for business, Travis figures he's in for another boring business trip.  He soon learns otherwise."
 The release number is 1.
 
-The story creation year is 2013.
+The story creation year is 2014.
 
 Volume - Testing & Debugging (not for release)
 
@@ -32,7 +30,7 @@ Include Locksmith by Emily Short.
 Include Plurality by Emily Short.
 Include Trinity Inventory by Mikael Segercrantz.
 Include Small Kindnesses by Aaron Reed.
-Include Keyword Interface by Aaron Reed.
+[Include Keyword Interface by Aaron Reed.]
 Include Questions by Michael Callaghan.
 
 
@@ -53,8 +51,8 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] was created in the fall and winter of 2013-2014.[paragraph break]";
-	say "[italic type][Story title][roman type] is copyright © 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+[	say "[italic type][Story title][roman type] was created in the fall and winter of 2013-2014.[paragraph break]";]
+	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (lautzenheiser.jason@gmail.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
 
 	
@@ -62,7 +60,7 @@ Volume - Uberstart
 
 The uberstart rules are a rulebook.
 
-After printing the banner text, say "Copyright © Jason Lautzenheiser 2013. [line break]First time players please type ABOUT."
+After printing the banner text, say "Copyright © Jason Lautzenheiser 2014. [line break]First time players please type ABOUT."
 
 The time of day is 6:36 PM.
 
@@ -73,28 +71,9 @@ An uberstart rule:
 	now the left hand status line is "[the player's surroundings] / Moves: [turn count] ";
 	now the right hand status line is "Time: [time of day]";
 	
-[if we end up supporting glulx title page and such, check out ghosterington-night source for an uberstart rule for title page.]
 
 
 
-[When play begins: 
-	now every scenery thing is keyworded;
-	display the boxed quotation "... Next came one [line break]
-	Who mourned in earnest, when the captive ark[line break]
-	Maimed his brute image, head and hands lopt off,[line break]
-	In his own temple, on the grunsel-edge,[line break]
-	Where he fell flat and shamed his worshippers:[line break]
-	Dagon his name, sea-monster, upward man[line break]
-	And downward fish; yet had his temple high[line break]
-	Reared in Azotus, dreaded through the coast[line break]
-	Of Palestine, in Gath and Ascalon,[line break]
-	And Accaron and Gaza's frontier bounds.[line break]
-[line break]
-	--Paradise Lost - John Milton[paragraph break]";
-	now the left hand status line is
-		"[the player's surroundings] / [turn count] / [score]";
-	now the right hand status line is "Time: [time of day]";
-	now the time of day is 7:13 PM.]
 
 
 
@@ -120,8 +99,8 @@ Every thing has some text called scent.  The scent is usually "".
 Everything has some text called texture. The texture of something is usually "".
 
 [Parser highlighting is true.]
-object keyword highlighting is false.
-direction keyword highlighting is false.
+[object keyword highlighting is false.
+direction keyword highlighting is false.]
 
 Book - Wakefulness
 
@@ -136,18 +115,10 @@ To say the prose version of (place - a room): if the prose name of place is "NUL
 
 Volume  - Mechanics
 
-
-
-
 Book - General Routines
 
 After printing the name of something (called the target): 
-	change the last mentioned thing to the target.
-	
-To say (regular verb - some text) in correct agreement:
-	  say "[regular verb][if the last mentioned thing is not plural-named]s".
-
-
+	now the last mentioned thing is the target.
 
 Book - New Relations
 
@@ -170,7 +141,6 @@ Part -Old Actions
 Chapter - Synonyms
 
 Understand "use [a door]" as opening. Understand "use [an open door]" as entering.
-[Understand the command "nothing" as listen.  Understand "say nothing" as listening.]
 Understand the command "bring" or "grab" as "take".
 Understand the command "see" as "look".
 
@@ -247,7 +217,8 @@ Understand the command "drop" as something new.
 
 Understand "drop [things preferably held]" as dropping.
 
-Dropping it on is an action applying to two things.  Understand "drop [things preferably held] on [other things]" as putting it on.
+Dropping it on is an action applying to two things.  
+Understand "drop [something preferably held] on [other things]" as putting it on.
 
 Chapter - Digging
 
@@ -268,11 +239,11 @@ Chapter - Smelling
 The ambient odor is a number that varies.  The ambient odor is 10.
 
 Instead of smelling:
-	let the regverb be "smell";
+	let the regverb be "smells";
 	if the noun is the location:
 		let R be 1;
 		repeat with N running from 1 to the number of rows in Table of Relative Smells:
-			change R to N;
+			now R is N;
 			if the intensity in row N of the Table of Relative Smells is greater than the ambient odor:
 				break;
 		if R is not the number of rows in the Table of Relative Smells:
@@ -285,7 +256,7 @@ Instead of smelling:
 			say "[The noun] is too far away to smell.";
 			the rule fails;
 		if the scent of the noun is "":
-	  	  	  say "The [noun] [the regverb in correct agreement] [one of]unremarkable[or]ordinary[or]not particularly interesting[in random order].";
+	  	  	  say "The [noun] [the regverb] [one of]unremarkable[or]ordinary[or]not particularly interesting[in random order].";
 	  	  	  the rule succeeds;
 		if the noun is the player:
 			say "You smell";
@@ -296,9 +267,9 @@ Instead of smelling:
 				say "She";
 			say " smells";
 		otherwise if the noun is part of the player or the noun is worn by the player:
-			say "Your [noun] [the regverb in correct agreement]";
+			say "Your [noun] [the regverb]";
 		otherwise:
-			say "[The noun] [the regverb in correct agreement]";			
+			say "[The noun] [the regverb]";			
 		say " [scent of the noun]."
 			
 Table of Relative Smells 
@@ -352,7 +323,7 @@ instead of telling someone about anything:
 	
 Book - Standard Responses
 
-Instead of singing: say "Back in the day you thought you were a decent singer, your ex-wife thought differently.  You decide to refrain from singing so as not to subject others to it."
+[Instead of singing: say "Back in the day you thought you were a decent singer, your ex-wife thought differently.  You decide to refrain from singing so as not to subject others to it."]
 Instead of saying sorry: say "You mumble apologetically under your breath."
 Instead of pushing or pulling or taking a fixed in place thing: say "You strain to move [the noun], but only succeed in working up a sweat and nothing more[if location is occupied]; well you do garner a few strange looks[end if]."
 Instead of climbing an enterable supporter, try entering the noun.
@@ -367,12 +338,12 @@ Book - New kinds
 
 Part - Elevator exterior
 
-An elevator exterior is an undescribed backdrop.  It is not scenery.   The description of the elevator exterior is "The [o][call button][x] is in the wall to the right of the [if elevator-door is open]open [end if]door.  [dial-description]".  The printed name of elevator exterior is "elevator".
+An elevator exterior is an undescribed backdrop.  It is not scenery.   The description of the elevator exterior is "The [call button] is in the wall to the right of the [if elevator-door is open]open [end if]door.  [dial-description]".  The printed name of elevator exterior is "elevator".
 
 The elevator-door is an undescribed container.  It is closed and openable.  The elevator-door is part of the elevator-exterior.
 
 To say dial-description:
-	say "Above the elevator is an [o]old-fashioned dial[x] that shows the elevator is currently on [run paragraph on]";
+	say "Above the elevator is an old-fashioned dial that shows the elevator is currently on [run paragraph on]";
 	if current level of the lift is 1:
 		say "your floor.";
 	otherwise:
@@ -387,7 +358,7 @@ before examining the elevator exterior:
 	otherwise:
 		instead say "[description of elevator exterior][paragraph break]".
 		
-Understand "elevators/door/doors" as elevator exterior when not in the Lift.
+Understand "elevators/door/doors" as elevator exterior when the location is not the Lift.
 
 The call button is a thing.  The call button is part of the elevator exterior.  The description of call button is "Just a single button resides beside the elevator door."
 
@@ -406,7 +377,7 @@ Part - Elevator
 
 The Lift is a room.  The description of the lift is "The large elevator [if the lift is unoccupied] is empty[end if].  A [three-legged stool], where a elevator jockey would sit, is in front of the elevators [control panel]."  The printed name of the Lift is "The Elevator".
 
-Understand "elevators/door/doors" as Lift when in the Lift.
+Understand "elevators/door/doors" as Lift when  the location is the Lift.
 
 The three-legged stool is a fixed in place supporter in the lift.  The description is "The three-legged stool sits in front of the elevators control panel."  The stool is enterable.
 
@@ -581,7 +552,7 @@ Part - Looking in directions
 
 Check examining a direction (called dir):
 	let rm be the room dir from location;
-	if rm is a room, say "[if dir is up]Above you[otherwise if dir is down]Below you[otherwise if dir is inside]Inside[otherwise if dir is outside]Outside[otherwise]To the [d][dir][x][end if] is [if rm is visited][prose name of rm][otherwise]an unexplored area[end if]." instead;
+	if rm is a room, say "[if dir is up]Above you[otherwise if dir is down]Below you[otherwise if dir is inside]Inside[otherwise if dir is outside]Outside[otherwise]To the [dir][end if] is [if rm is visited][prose name of rm][otherwise]an unexplored area[end if]." instead;
 	otherwise say "Nothing interesting in that direction." instead.
 	
 Part - Get All
@@ -663,10 +634,8 @@ Every tom sometimes wears white gloves.
 
 Part - Doorman
 
-
-instead of waving:
-	if location is in outside-hotel and the doorman is in outside-hotel:
-		say "You wave at the doorman, who's huge grin widens beyond what seems possible."
+instead of waving when location is outside-hotel and the doorman is in outside-hotel:
+	say "You wave at the doorman, who's huge grin widens beyond what seems possible."
 
 [This may be Tom in another guise, but lets' make him a seperate person in code for ease of coding]
 The doorman is a tom in Outside-Hotel.  "[one of]The [doorman] sees you standing there and waves.[or]The [doorman] is standing here beside the door.[stopping]".  
@@ -882,7 +851,7 @@ Understand "painting" as portrait.
 
 Part - Room 203 Key
 
-The inventory listing of the room-203-key is "the [o]key[x] to room 203".  Understand "key/skeleton" or "skeleton key" or "203 key" or "room 203 key" as room-203-key.  The printed name of room-203-key is "Room 203 key".
+The inventory listing of the room-203-key is "the key to room 203".  Understand "key/skeleton" or "skeleton key" or "203 key" or "room 203 key" as room-203-key.  The printed name of room-203-key is "Room 203 key".
 
 The description of room-203-key is "An old skeleton key with 203 embossed along the shaft."
 
@@ -898,8 +867,8 @@ The description of the fishbowl is "The small glass fishbowl sits on the counter
 The fish is an undescribed thing.  The fish are in the fishbowl.  The fish are plural-named.
 The water is a fluid thing in the fishbowl.  The water is undescribed.
 
-A procedural rule while examining the fishbowl: 
-	ignore the examine containers rule. 
+[A procedural rule while examining the fishbowl: 
+	ignore the examine containers rule. ]
 
 Instead of taking the fishbowl:
 	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if] nearly jumps over the counter to stop you, 'Those are the property of the Inn, please do not take them', he yells breathlessly.  'You will do well to remember that things that are not yours, should not be taken.'[paragraph break]He seems a bit worked up over a pair of fish, but for now you heed his warning."
@@ -907,7 +876,8 @@ Instead of taking the fishbowl:
 instead of taking anything contained by the fishbowl:
 	try taking the fishbowl.
 
-before doing something other than taking or examining the fishbowl:
+[before doing anything except taking or examining the fishbowl when the location is lobby:]
+before doing anything except taking or examining to the fishbowl when the location is the lobby:
 	say "[if desk clerk is recognized]Tom [otherwise]The desk clerk [end if]glares at you and you decide to rethink doing that." instead.
 	
 Book - Hotel Lounge
@@ -927,7 +897,7 @@ The ladies are an undescribed thing in hotel-lounge.  The description of ladies 
 
 Book - Main Floor by the Elevator
 
-first-floor-by-elevator is a room. "You stand outside the [if elevator-door is open]opened [end if][o]elevator[x].  [The description of elevator exterior]".  The first-floor-by-elevator is north of lobby.  The printed name is "First floor by the elevator".
+first-floor-by-elevator is a room. "You stand outside the [if elevator-door is open]opened [end if]elevator.  [The description of elevator exterior]".  The first-floor-by-elevator is north of lobby.  The printed name is "First floor by the elevator".
 
 The elevator exterior is in first-floor-by-elevator.  
 	
@@ -937,13 +907,13 @@ reg-second-floor is a region.  second-floor-by-elevator, outside-room-203, vendi
 
 Book - Second Floor by the Elevator
 
-second-floor-by-elevator is a room.  The description of second-floor-by-elevator  is "You stand outside the [if elevator-door is open]opened [end if][o]elevator[x] on the second floor.  To the south is a hallway where you can see a row of doors to the rooms on this floor.  To the east is an area with vending machines.  [paragraph break][The description of elevator exterior]".  The printed name is "Second floor by the elevator".
+second-floor-by-elevator is a room.  The description of second-floor-by-elevator  is "You stand outside the [if elevator-door is open]opened [end if]elevator on the second floor.  To the south is a hallway where you can see a row of doors to the rooms on this floor.  To the east is an area with vending machines.  [paragraph break][The description of elevator exterior]".  The printed name is "Second floor by the elevator".
 
 The elevator exterior is in second-floor-by-elevator .
 
 Book - Outside room 203
 
-Outside-room-203 is a room.  "You are standing outside room room.  On the [o][massive oak door][x] to the east are [o]large brass numbers[x] that ensure there is no mistaking what room this is.  Set in the center of the door just below the numbers is [o][the peep hole][x]."
+Outside-room-203 is a room.  "You are standing outside room room.  On the [massive oak door] to the east are large brass numbers that ensure there is no mistaking what room this is.  Set in the center of the door just below the numbers is [the peep hole]."
 
 Large brass numbers are a thing.  Large brass numbers are  part of massive oak door.  The description of large brass numbers is "The numbers read 203."
 
